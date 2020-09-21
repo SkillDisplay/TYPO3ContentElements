@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.0" xmlns:t3="http://typo3.org/schemas/xliff">
+    <file source-language="en" datatype="plaintext">
+        <header/>
+        <body>
+            <trans-unit id="newContentElement.skilldisplay.header">
+                <source>SkillDisplay</source>
+            </trans-unit>
+            <trans-unit id="newContentElement.skilldisplay.skills.description">
+                <source>Renders one or multiple skills.</source>
+            </trans-unit>
+
+            <trans-unit id="site.div.skilldisplay">
+                <source>SkillDisplay</source>
+            </trans-unit>
+            <trans-unit id="site.skilldisplay_user_secret">
+                <source>User secret</source>
+            </trans-unit>
+            <trans-unit id="site.skilldisplay_api_key">
+                <source>API Key</source>
+            </trans-unit>
+            <trans-unit id="site.skilldisplay_verifier_id">
+                <source>Verifier ID</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

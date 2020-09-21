@@ -1,0 +1,6 @@
+mod {
+    wizards.newContentElement.wizardItems.skilldisplay {
+        header = LLL:EXT:skilldisplay/Resources/Private/Language/locallang_be.xlf:newContentElement.skilldisplay.header
+        show = *
+    }
+}

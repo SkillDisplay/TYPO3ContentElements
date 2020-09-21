@@ -1,0 +1,33 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    SkillDisplay\Typo3Extension\:
+        resource: '../Classes/*'
+
+    SkillDisplay\Typo3Extension\Frontend\DataProcessing\:
+        resource: '../Classes/Frontend/DataProcessing/*'
+        public: true
+
+    skilldisplay.settings:
+        class: 'SkillDisplay\PHPToolKit\Configuration\Settings'
+        factory:
+            - '@SkillDisplay\Typo3Extension\SettingsFactory'
+            - 'createFromCurrentSiteConfiguration'
+
+    SkillDisplay\PHPToolKit\Configuration\Settings:
+        alias: '@skilldisplay.settings'
+
+    SkillDisplay\PHPToolKit\Api\Skill:
+        arguments:
+            $settings: '@skilldisplay.settings'
+
+    SkillDisplay\PHPToolKit\Verification\Link:
+        public: true
+        arguments:
+            $settings: '@skilldisplay.settings'
+
+    SkillDisplay\Typo3Extension\Backend\Preview:
+        public: true

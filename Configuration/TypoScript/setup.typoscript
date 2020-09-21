@@ -1,0 +1,11 @@
+tt_content.skilldisplay_skills = < lib.contentElement
+tt_content.skilldisplay_skills {
+    templateName = SkillDisplaySkills
+
+    dataProcessing {
+        10 = SkillDisplay\Typo3Extension\Frontend\DataProcessing\Skills
+        10 {
+            skills.field = skilldisplay_skills
+        }
+    }
+}

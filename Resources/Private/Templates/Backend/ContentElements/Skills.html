@@ -1,0 +1,19 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
+    xmlns:sd="http://typo3.org/ns/SkillDisplay/Typo3Extension/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+
+    <a href="{be:uri.editRecord(
+        uid: uid,
+        table: 'tt_content'
+    )}">
+        <ol>
+            <f:for each="{skills}" as="skill">
+                <li>
+                    <strong>{skill.title}</strong><br>
+                    {sd:verification.url(skill: skill.id)}
+                </li>
+            </f:for>
+        </ol>
+    </a>
+</html>
