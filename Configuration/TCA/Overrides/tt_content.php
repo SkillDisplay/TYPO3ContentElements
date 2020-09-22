@@ -22,6 +22,16 @@
                     'size' => 10,
                 ],
             ],
+            'skilldisplay_skillset' => [
+                'exclude' => 1,
+                'label' => $languagePath . 'skilldisplay_skillset',
+                'description' => $languagePath . 'skilldisplay_skillset.description',
+                'config' => [
+                    'type' => 'input',
+                    'eval' => 'int,required',
+                    'size' => 10,
+                ],
+            ],
         ],
     ]);
 })('skilldisplay', 'tt_content');

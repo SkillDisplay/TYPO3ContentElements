@@ -1,0 +1,13 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:sd="http://typo3.org/ns/SkillDisplay/Typo3Extension/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+    <f:for each="{skillSets}" as="skillSet">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{skillSet.name}</h5>
+                <p class="card-text">{skillSet.description -> f:format.html()}</p>
+                <sd:verification.button skillSet="{skillSet.id}"/>
+            </div>
+        </div>
+    </f:for>
+</html>

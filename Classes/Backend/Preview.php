@@ -22,6 +22,7 @@ namespace SkillDisplay\Typo3Extension\Backend;
  */
 
 use SkillDisplay\PHPToolKit\Api\Skill;
+use SkillDisplay\PHPToolKit\Api\SkillSet;
 use TYPO3\CMS\Backend\View\PageLayoutView;
 use TYPO3\CMS\Backend\View\PageLayoutViewDrawItemHookInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -33,10 +34,17 @@ class Preview implements PageLayoutViewDrawItemHookInterface
      */
     protected $skillApi;
 
+    /**
+     * @var SkillSet
+     */
+    private $skillSetApi;
+
     public function __construct(
-        Skill $skillApi
+        Skill $skillApi,
+        SkillSet $skillSetApi
     ) {
         $this->skillApi = $skillApi;
+        $this->skillSetApi = $skillSetApi;
     }
 
     /**
@@ -50,9 +58,36 @@ class Preview implements PageLayoutViewDrawItemHookInterface
         array &$row
     ) {
         $row['skills'] = [];
+        $row['skillSets'] = [];
+
+        if ($row['skilldisplay_skills'] != '') {
+            $row = $this->addSkills($row);
+        }
+
+        if ($row['skilldisplay_skillset'] > 0) {
+            $row = $this->addSkillSets($row);
+        }
+    }
+
+    private function addSkills(array $row): array
+    {
         $skills = GeneralUtility::intExplode(',', $row['skilldisplay_skills'], true);
+
         foreach ($skills as $skillId) {
             $row['skills'][] = $this->skillApi->getById($skillId);
         }
+
+        return $row;
+    }
+
+    private function addSkillSets(array $row): array
+    {
+        $skillSets = GeneralUtility::intExplode(',', $row['skilldisplay_skillset'], true);
+
+        foreach ($skillSets as $skillSetId) {
+            $row['skillSets'][] = $this->skillSetApi->getById($skillSetId);
+        }
+
+        return $row;
     }
 }

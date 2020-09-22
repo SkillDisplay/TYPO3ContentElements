@@ -22,33 +22,19 @@ namespace SkillDisplay\Typo3Extension\ViewHelpers\Verification;
  */
 
 use SkillDisplay\PHPToolKit\Verification\Link;
-use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
-use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
-use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
+use SkillDisplay\Typo3Extension\ViewHelpers\VerificationViewHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-class ButtonViewHelper extends AbstractViewHelper
+class ButtonViewHelper extends VerificationViewHelper
 {
-    use CompileWithRenderStatic;
-
-    protected $escapeOutput = false;
-
-    public function initializeArguments()
+    protected static function verificationHtml(array $arguments): string
     {
-        $this->registerArgument('skill', 'integer', 'ID of the skill.', true);
-        $this->registerArgument('type', 'string', 'Type of verification', false, 'self');
-    }
-
-    public static function renderStatic(
-        array $arguments,
-        \Closure $renderChildrenClosure,
-        RenderingContextInterface $renderingContext
-    ) {
         /** @var Link $link */
         $link = GeneralUtility::makeInstance(Link::class);
         return $link->getVerificationButton(
             $arguments['type'],
-            $arguments['skill']
+            static::getId($arguments),
+            static::getType($arguments)
         );
     }
 }

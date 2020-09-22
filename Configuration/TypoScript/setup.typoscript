@@ -9,3 +9,15 @@ tt_content.skilldisplay_skills {
         }
     }
 }
+
+tt_content.skilldisplay_skillset = < lib.contentElement
+tt_content.skilldisplay_skillset {
+    templateName = SkillDisplaySkillSet
+
+    dataProcessing {
+        10 = SkillDisplay\Typo3Extension\Frontend\DataProcessing\SkillSets
+        10 {
+            skillSets.field = skilldisplay_skillset
+        }
+    }
+}

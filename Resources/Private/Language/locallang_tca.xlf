@@ -9,6 +9,12 @@
             <trans-unit id="tt_content.skilldisplay_skills.description">
                 <source>Comma separated list of UIDs.</source>
             </trans-unit>
+            <trans-unit id="tt_content.skilldisplay_skillset">
+                <source>SkillDisplay: SkillSet</source>
+            </trans-unit>
+            <trans-unit id="tt_content.skilldisplay_skillset.description">
+                <source>UID of SkillSet</source>
+            </trans-unit>
             <trans-unit id="tt_content.CType.itemGroups.skilldisplay">
                 <source>SkillDisplay</source>
             </trans-unit>

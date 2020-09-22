@@ -9,6 +9,9 @@
             <trans-unit id="newContentElement.skilldisplay.skills.description">
                 <source>Renders one or multiple skills.</source>
             </trans-unit>
+            <trans-unit id="newContentElement.skilldisplay.skillset.description">
+                <source>Renders one skillset.</source>
+            </trans-unit>
 
             <trans-unit id="site.div.skilldisplay">
                 <source>SkillDisplay</source>
