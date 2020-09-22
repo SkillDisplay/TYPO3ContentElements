@@ -3,11 +3,17 @@
     "description": "SkillDisplay integration for TYPO3",
     "type": "typo3-cms-extension",
     "license": "GPL-2.0-or-later",
-    "homepage": "https://daniel-siepmann.de/projects/typo3-extension-skilldisplay.html",
+    "homepage": "https://github.com/SkillDisplay/TYPO3ContentElements",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:DanielSiepmann/PHPToolKit.git"
+        }
+    ],
     "support": {
         "email": "coding@daniel-siepmann.de",
-        "source": "https://github.com/DanielSiepmann/SkillDisplay/",
-        "issues": "https://github.com/DanielSiepmann/SkillDisplay/issues"
+        "source": "https://github.com/SkillDisplay/TYPO3ContentElements",
+        "issues": "https://github.com/SkillDisplay/TYPO3ContentElements/issues"
     },
     "authors": [
         {
@@ -26,11 +32,12 @@
         }
     },
     "require": {
-        "php": "^7.3.0",
+        "php": "7.2.* || 7.3.* || 7.4.*",
         "typo3/cms-core": "^10.4",
-        "skilldisplay/phptoolkit": "^1.0",
+        "skilldisplay/phptoolkit": "dev-feature/improve-api as v1.0.x-dev",
         "typo3/cms-backend": "^10.4",
-        "typo3/cms-frontend": "^10.4"
+        "typo3/cms-frontend": "^10.4",
+        "typo3fluid/fluid": "^2.6"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.5",

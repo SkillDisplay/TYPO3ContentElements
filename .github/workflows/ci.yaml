@@ -1,0 +1,158 @@
+name: CI
+on: [push]
+jobs:
+  check-composer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Validate composer.json
+        run: composer validate
+
+  php-linting:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version:
+          - 7.2
+          - 7.3
+          - 7.4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "${{ matrix.php-version }}"
+
+      - name: PHP lint
+        run: "find *.php Classes Configuration -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l"
+
+  check-cgl:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: |
+            echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - uses: actions/cache@v1
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Check CGL
+        run: ./vendor/bin/phpcs
+
+  check-dependencies:
+    runs-on: ubuntu-latest
+    needs: [check-composer]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: |
+            echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - uses: actions/cache@v1
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest --no-plugins
+
+      - name: Missing composer requirements
+        run: ./vendor/bin/composer-require-checker check
+
+  xml-linting:
+    runs-on: ubuntu-latest
+    needs: [check-composer]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install xmllint
+        run: sudo apt-get install libxml2-utils
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: |
+            echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - uses: actions/cache@v1
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: PHPCodeSniffer configuration file
+        run: xmllint --schema vendor/squizlabs/php_codesniffer/phpcs.xsd --noout phpcs.xml.dist
+
+      - name: Fetch schema for xliff
+        run: wget https://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd --output-document=.Build/xliff-core-1.2-strict.xsd
+
+      - name: TYPO3 language files
+        run: xmllint --schema .Build/xliff-core-1.2-strict.xsd --noout $(find Resources -name '*.xlf')
+
+  code-quality:
+    runs-on: ubuntu-latest
+    needs: [check-dependencies]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: |
+            echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - uses: actions/cache@v1
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Code Quality (by PHPStan)
+        run: ./vendor/bin/phpstan analyse
+
+  security-test:
+    runs-on: ubuntu-latest
+    needs: [check-dependencies]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: |
+            echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - uses: actions/cache@v1
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: PHP Security test
+        run: ./vendor/bin/security-checker security:check --no-ansi

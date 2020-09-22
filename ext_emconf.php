@@ -1,4 +1,5 @@
 <?php
+
 $EM_CONF[$_EXTKEY] = [
     'title' => 'SkillDisplay',
     'description' => 'Integrates SkillDisplay',

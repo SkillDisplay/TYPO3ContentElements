@@ -39,6 +39,9 @@ class Preview implements PageLayoutViewDrawItemHookInterface
         $this->skillApi = $skillApi;
     }
 
+    /**
+     * @return void
+     */
     public function preProcess(
         PageLayoutView &$parentObject,
         &$drawItem,
