@@ -3,6 +3,7 @@
     <description>This project coding standard</description>
 
     <file>Classes/</file>
+    <file>Tests/</file>
     <file>Configuration/</file>
     <file>ext_emconf.php</file>
     <file>ext_localconf.php</file>

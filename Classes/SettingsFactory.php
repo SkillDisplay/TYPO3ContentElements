@@ -22,31 +22,10 @@ namespace SkillDisplay\Typo3Extension;
  */
 
 use SkillDisplay\PHPToolKit\Configuration\Settings;
-use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Http\ServerRequest;
-use TYPO3\CMS\Core\Site\SiteFinder;
 
 class SettingsFactory
 {
-    /**
-     * @var SiteFinder
-     */
-    private $siteFinder;
-
-    /**
-     * @var Context
-     */
-    private $context;
-
-
-    public function __construct(
-        SiteFinder $siteFinder,
-        Context $context
-    ) {
-        $this->siteFinder = $siteFinder;
-        $this->context = $context;
-    }
-
     public function createFromCurrentSiteConfiguration(): Settings
     {
         $site = $this->getRequest()->getAttribute('site');
@@ -58,7 +37,7 @@ class SettingsFactory
 
         return new Settings(
             $config['skilldisplay_api_key'] ?? '',
-            ((int)$config['skilldisplay_verifier_id']) ?? 0,
+            (int)($config['skilldisplay_verifier_id'] ?? 0),
             $config['skilldisplay_user_secret'] ?? ''
         );
     }
