@@ -21,12 +21,11 @@ namespace SkillDisplay\Typo3Extension\Tests\Unit\ViewHelpers\Verification;
  * 02110-1301, USA.
  */
 
-use Prophecy\PhpUnit\ProphecyTrait;
 use SkillDisplay\PHPToolKit\Verification\Link;
 use SkillDisplay\Typo3Extension\ViewHelpers\Verification\ButtonViewHelper;
-use PHPUnit\Framework\TestCase;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase as TestCase;
 
 /**
  * @covers SkillDisplay\Typo3Extension\ViewHelpers\Verification\ButtonViewHelper
@@ -34,8 +33,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class ButtonViewHelperTest extends TestCase
 {
-    use ProphecyTrait;
-
     /**
      * @test
      */

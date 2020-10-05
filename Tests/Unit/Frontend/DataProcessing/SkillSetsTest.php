@@ -21,20 +21,17 @@ namespace SkillDisplay\Typo3Extension\Tests\Unit\Frontend\DataProcessing;
  * 02110-1301, USA.
  */
 
-use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
 use SkillDisplay\PHPToolKit\Api\SkillSet;
 use SkillDisplay\PHPToolKit\Entity\SkillSet as SkillSetEntity;
 use SkillDisplay\Typo3Extension\Frontend\DataProcessing\SkillSets;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase as TestCase;
 
 /**
  * @covers SkillDisplay\Typo3Extension\Frontend\DataProcessing\SkillSets
  */
 class SkillSetsTest extends TestCase
 {
-    use ProphecyTrait;
-
     /**
      * @test
      */

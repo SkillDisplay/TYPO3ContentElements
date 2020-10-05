@@ -44,7 +44,6 @@
         "phpstan/phpstan": "^0.12.18",
         "phpstan/extension-installer": "^1.0",
         "maglnet/composer-require-checker": "^2.1",
-        "phpspec/prophecy-phpunit": "^2.0.0",
         "saschaegerer/phpstan-typo3": "^0.13.1",
         "sensiolabs/security-checker": "^6.0",
         "typo3/testing-framework": "^6.4",
