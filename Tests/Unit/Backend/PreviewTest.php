@@ -188,4 +188,106 @@ class PreviewTest extends TestCase
             ],
         ], $row);
     }
+
+    /**
+     * @test
+     */
+    public function addsExceptionMessageForSkills(): void
+    {
+        $skillApi = $this->prophesize(Skill::class);
+        $skillSetApi = $this->prophesize(SkillSet::class);
+        $pageLayoutView = $this->prophesize(PageLayoutView::class);
+        $exception = new \Exception('Some helpfull message');
+
+        $skill10 = $this->prophesize(SkillEntity::class);
+        $skillApi->getById(10)->willThrow($exception);
+        $skill20 = $this->prophesize(SkillEntity::class);
+        $skillApi->getById(20)->willReturn($skill20->reveal());
+
+        $subject = new Preview(
+            $skillApi->reveal(),
+            $skillSetApi->reveal()
+        );
+
+        $revealedPageLayoutView = $pageLayoutView->reveal();
+        $drawItem = false;
+        $headerContent = '';
+        $itemContent = '';
+        $row = [
+            'skilldisplay_skills' => '10, 20,,',
+            'skilldisplay_skillset' => '0',
+        ];
+
+        $subject->preProcess(
+            $revealedPageLayoutView,
+            $drawItem,
+            $headerContent,
+            $itemContent,
+            $row
+        );
+
+        static::assertFalse($drawItem);
+        static::assertEmpty($headerContent);
+        static::assertEmpty($itemContent);
+        static::assertSame([
+            'skilldisplay_skills' => '10, 20,,',
+            'skilldisplay_skillset' => '0',
+            'skills' => [
+                [
+                    'error' => 'Some helpfull message',
+                ],
+                $skill20->reveal(),
+            ],
+            'skillSets' => [],
+        ], $row);
+    }
+
+    /**
+     * @test
+     */
+    public function addsExceptionMessageForSkillSets(): void
+    {
+        $skillApi = $this->prophesize(Skill::class);
+        $skillSetApi = $this->prophesize(SkillSet::class);
+        $pageLayoutView = $this->prophesize(PageLayoutView::class);
+        $exception = new \Exception('Some helpfull message');
+
+        $skillSetApi->getById(10)->willThrow($exception);
+
+        $subject = new Preview(
+            $skillApi->reveal(),
+            $skillSetApi->reveal()
+        );
+
+        $revealedPageLayoutView = $pageLayoutView->reveal();
+        $drawItem = false;
+        $headerContent = '';
+        $itemContent = '';
+        $row = [
+            'skilldisplay_skills' => '',
+            'skilldisplay_skillset' => '10',
+        ];
+
+        $subject->preProcess(
+            $revealedPageLayoutView,
+            $drawItem,
+            $headerContent,
+            $itemContent,
+            $row
+        );
+
+        static::assertFalse($drawItem);
+        static::assertEmpty($headerContent);
+        static::assertEmpty($itemContent);
+        static::assertSame([
+            'skilldisplay_skills' => '',
+            'skilldisplay_skillset' => '10',
+            'skills' => [],
+            'skillSets' => [
+                [
+                    'error' => 'Some helpfull message',
+                ],
+            ],
+        ], $row);
+    }
 }

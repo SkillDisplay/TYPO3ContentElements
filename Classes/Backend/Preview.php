@@ -74,7 +74,11 @@ class Preview implements PageLayoutViewDrawItemHookInterface
         $skills = GeneralUtility::intExplode(',', $row['skilldisplay_skills'], true);
 
         foreach ($skills as $skillId) {
-            $row['skills'][] = $this->skillApi->getById($skillId);
+            try {
+                $row['skills'][] = $this->skillApi->getById($skillId);
+            } catch (\Exception $e) {
+                $row['skills'][]['error'] = $e->getMessage();
+            }
         }
 
         return $row;
@@ -85,7 +89,11 @@ class Preview implements PageLayoutViewDrawItemHookInterface
         $skillSets = GeneralUtility::intExplode(',', $row['skilldisplay_skillset'], true);
 
         foreach ($skillSets as $skillSetId) {
-            $row['skillSets'][] = $this->skillSetApi->getById($skillSetId);
+            try {
+                $row['skillSets'][] = $this->skillSetApi->getById($skillSetId);
+            } catch (\Exception $e) {
+                $row['skillSets'][]['error'] = $e->getMessage();
+            }
         }
 
         return $row;

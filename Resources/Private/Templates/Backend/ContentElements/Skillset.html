@@ -10,7 +10,15 @@
         <ol>
             <f:for each="{skillSets}" as="skillSet">
                 <li>
-                    <strong>{skillSet.name}</strong><br>
+                    <f:if condition="{skillSet.error}">
+                        <f:then>
+                            <f:be.infobox state="2">{skillSet.error}</f:be.infobox>
+                        </f:then>
+                        <f:else>
+                            <strong>{skillSet.title}</strong><br>
+                            {sd:verification.url(skillSet: skillSet.id)}
+                        </f:else>
+                    </f:if>
                 </li>
             </f:for>
         </ol>

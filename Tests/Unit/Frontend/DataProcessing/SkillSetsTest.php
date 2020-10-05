@@ -106,4 +106,39 @@ class SkillSetsTest extends TestCase
             ],
         ], $processedData);
     }
+
+    /**
+     * @test
+     */
+    public function skillsSkillSetInCaseOfException(): void
+    {
+        $skillApi = $this->prophesize(SkillSet::class);
+        $skillSet10 = $this->prophesize(SkillSetEntity::class);
+        $skillApi->getById(10)->willReturn($skillSet10->reveal());
+        $skillSet20 = $this->prophesize(SkillSetEntity::class);
+        $skillApi->getById(20)->willThrow(new \Exception());
+
+        $cObj = $this->prophesize(ContentObjectRenderer::class);
+        $cObj->stdWrapValue('as', [], 'skillSets')->willReturn('skillSets');
+        $cObj->stdWrapValue('skillSets', [], '')->willReturn('10, 20,,');
+
+        $subject = new SkillSets(
+            $skillApi->reveal()
+        );
+
+        $processedData = $subject->process(
+            $cObj->reveal(),
+            [],
+            [],
+            [
+                'skillSets' => '10, 20,,',
+            ]
+        );
+
+        static::assertEquals([
+            'skillSets' => [
+                $skillSet10->reveal(),
+            ],
+        ], $processedData);
+    }
 }

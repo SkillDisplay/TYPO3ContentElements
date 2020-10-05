@@ -54,7 +54,11 @@ class Skills implements DataProcessorInterface
         $skills = [];
 
         foreach ($skillIds as $skillId) {
-            $skills[] = $this->skillApi->getById($skillId);
+            try {
+                $skills[] = $this->skillApi->getById($skillId);
+            } catch (\Exception $e) {
+                continue;
+            }
         }
 
         $processedData[$as] = $skills;

@@ -10,8 +10,15 @@
         <ol>
             <f:for each="{skills}" as="skill">
                 <li>
-                    <strong>{skill.title}</strong><br>
-                    {sd:verification.url(skill: skill.id)}
+                    <f:if condition="{skill.error}">
+                        <f:then>
+                            <f:be.infobox state="2">{skill.error}</f:be.infobox>
+                        </f:then>
+                        <f:else>
+                            <strong>{skill.title}</strong><br>
+                            {sd:verification.url(skill: skill.id)}
+                        </f:else>
+                    </f:if>
                 </li>
             </f:for>
         </ol>
