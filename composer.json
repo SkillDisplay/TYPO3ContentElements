@@ -4,12 +4,6 @@
     "type": "typo3-cms-extension",
     "license": "GPL-2.0-or-later",
     "homepage": "https://github.com/SkillDisplay/TYPO3ContentElements",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@github.com:DanielSiepmann/PHPToolKit.git"
-        }
-    ],
     "support": {
         "email": "coding@daniel-siepmann.de",
         "source": "https://github.com/SkillDisplay/TYPO3ContentElements",
@@ -34,7 +28,7 @@
     "require": {
         "php": "7.2.* || 7.3.* || 7.4.*",
         "typo3/cms-core": "^10.4",
-        "skilldisplay/phptoolkit": "dev-feature/improve-api as v1.0.x-dev",
+        "skilldisplay/phptoolkit": "^1.1",
         "typo3/cms-backend": "^10.4",
         "typo3/cms-frontend": "^10.4",
         "typo3fluid/fluid": "^2.6"
