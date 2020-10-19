@@ -2,12 +2,12 @@
     xmlns:sd="http://typo3.org/ns/SkillDisplay/Typo3Extension/ViewHelpers"
     data-namespace-typo3-fluid="true">
     <f:for each="{skillSets}" as="skillSet">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">{skillSet.name}</h5>
-                <p class="card-text">{skillSet.description -> f:format.html()}</p>
-                <sd:verification.button skillSet="{skillSet.id}"/>
-            </div>
-        </div>
+        {f:render(partial: 'VerificationBox', arguments: {
+            title: skillSet.name,
+            count: '{skillSet.skills -> f:count()}',
+            detailUrl: 'https://my.skilldisplay.eu/skillset/{skillSet.id}',
+            verificationUrl: '{sd:verification.url(skillSet: skillSet.id)}',
+            description: skillSet.description
+        })}
     </f:for>
 </html>

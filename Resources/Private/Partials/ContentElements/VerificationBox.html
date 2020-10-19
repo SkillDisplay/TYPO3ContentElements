@@ -1,0 +1,30 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+
+    <div class="sd-verification-box sd-font sd-drop-shadow">
+        <div class="sd-header">
+            <div>
+                <span class="sd-title">{title}</span>
+                <div class="sd-info">
+                    <f:if condition="{count}">
+                        <span>{skillSet.skills -> f:count()}</span>
+                    </f:if>
+                    <a href="{detailUrl}" target="_blank">View on SkillDisplay</a>
+                </div>
+            </div>
+            <div class="sd-brand">
+                <img src="{f:uri.resource(extensionName: 'skilldisplay', path: 'Images/htl3r.jpg')}" />
+            </div>
+        </div>
+        <p class="sd-description">{description -> f:format.html()}</p>
+        <div class="sd-buttons">
+            <a href="{verificationUrl}" class="sd-button sd-learner sd-verified">
+                <div class="sd-hint">
+                    <f:image src="{f:uri.resource(extensionName: 'skilldisplay', path: 'Images/pending.svg')}" title="Pending" alt="Indicates self assessment is pending" />
+                </div>
+                <div class="sd-type">Self Assessment</div>
+            </a>
+        </div>
+    </div>
+
+</html>

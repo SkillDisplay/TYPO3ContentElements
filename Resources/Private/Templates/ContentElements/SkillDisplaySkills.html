@@ -2,12 +2,11 @@
     xmlns:sd="http://typo3.org/ns/SkillDisplay/Typo3Extension/ViewHelpers"
     data-namespace-typo3-fluid="true">
     <f:for each="{skills}" as="skill">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">{skill.title}</h5>
-                <p class="card-text">{skill.description -> f:format.html()}</p>
-                <sd:verification.button skill="{skill.id}"/>
-            </div>
-        </div>
+        {f:render(partial: 'VerificationBox', arguments: {
+            title: skill.title,
+            detailUrl: 'https://my.skilldisplay.eu/skill/{skill.id}/0',
+            verificationUrl: '{sd:verification.url(skill: skill.id)}',
+            description: skill.description
+        })}
     </f:for>
 </html>

@@ -21,3 +21,9 @@ tt_content.skilldisplay_skillset {
         }
     }
 }
+
+page {
+    includeCSS {
+        skilldisplay = EXT:skilldisplay/Resources/Public/Css/Styles.css
+    }
+}
