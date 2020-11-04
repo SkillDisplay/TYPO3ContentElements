@@ -6,7 +6,7 @@
             title: skillSet.name,
             count: '{skillSet.skills -> f:count()}',
             detailUrl: 'https://my.skilldisplay.eu/skillset/{skillSet.id}',
-            brandLogoUrl: skillSet.mediaPublicUrl,
+            brandLogoUrl: skillSet.brand.logoPublicUrl,
             verificationUrl: '{sd:verification.url(skillSet: skillSet.id)}',
             description: skillSet.description
         })}

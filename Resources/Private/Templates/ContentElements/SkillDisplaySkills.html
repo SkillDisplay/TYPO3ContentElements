@@ -5,7 +5,7 @@
         {f:render(partial: 'VerificationBox', arguments: {
             title: skill.title,
             detailUrl: 'https://my.skilldisplay.eu/skill/{skill.id}/0',
-            brandLogoUrl: skill.mediaPublicUrl,
+            brandLogoUrl: skill.brands.0.logoPublicUrl,
             verificationUrl: '{sd:verification.url(skill: skill.id)}',
             description: skill.description
         })}
