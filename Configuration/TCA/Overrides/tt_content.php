@@ -32,6 +32,15 @@
                     'size' => 10,
                 ],
             ],
+            'skilldisplay_campaign' => [
+                'label' => $languagePath . 'skilldisplay_campaign',
+                'config' => [
+                    'type' => 'select',
+                    'renderType' => 'selectSingle',
+                    'itemsProcFunc' => \SkillDisplay\Typo3Extension\TcaEnhancer::class . '->' . 'getCampaignsForTCA',
+                    'items' => []
+                ]
+            ],
         ],
     ]);
 })('skilldisplay', 'tt_content');

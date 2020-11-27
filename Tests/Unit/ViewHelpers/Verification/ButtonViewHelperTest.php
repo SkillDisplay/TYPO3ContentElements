@@ -21,6 +21,8 @@ namespace SkillDisplay\Typo3Extension\Tests\Unit\ViewHelpers\Verification;
  * 02110-1301, USA.
  */
 
+use Prophecy\PhpUnit\ProphecyTrait;
+use Prophecy\Prophecy\ObjectProphecy;
 use SkillDisplay\PHPToolKit\Verification\Link;
 use SkillDisplay\Typo3Extension\ViewHelpers\Verification\ButtonViewHelper;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
@@ -33,6 +35,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase as TestCase;
  */
 class ButtonViewHelperTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * @test
      */
@@ -47,6 +51,7 @@ class ButtonViewHelperTest extends TestCase
             [
                 'skill' => 10,
                 'skillSet' => 10,
+                'campaign' => 0,
             ],
             function () {
             },
@@ -79,14 +84,16 @@ class ButtonViewHelperTest extends TestCase
     public function returnsRenderedButtonForSkill(): void
     {
         $renderingContext = $this->prophesize(RenderingContextInterface::class);
+        /** @var Link|ObjectProphecy $link */
         $link = $this->prophesize(Link::class);
-        $link->getVerificationButton('self', 10, Link::SKILL)->willReturn('<p>expected HTML</p>');
+        $link->getVerificationButton('self', 10, Link::SKILL, 0)->willReturn('<p>expected HTML</p>');
         GeneralUtility::addInstance(Link::class, $link->reveal());
 
         $result = ButtonViewHelper::renderStatic(
             [
                 'skill' => 10,
                 'type' => 'self',
+                'campaign' => 0,
             ],
             function () {
             },
@@ -101,14 +108,16 @@ class ButtonViewHelperTest extends TestCase
     public function returnsRenderedButtonForSkillSet(): void
     {
         $renderingContext = $this->prophesize(RenderingContextInterface::class);
+        /** @var Link|ObjectProphecy $link */
         $link = $this->prophesize(Link::class);
-        $link->getVerificationButton('self', 10, Link::SKILL_SET)->willReturn('<p>expected HTML</p>');
+        $link->getVerificationButton('self', 10, Link::SKILL_SET, 0)->willReturn('<p>expected HTML</p>');
         GeneralUtility::addInstance(Link::class, $link->reveal());
 
         $result = ButtonViewHelper::renderStatic(
             [
                 'skillSet' => 10,
                 'type' => 'self',
+                'campaign' => 0,
             ],
             function () {
             },

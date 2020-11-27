@@ -28,6 +28,10 @@ services:
         arguments:
             $settings: '@skilldisplay.settings'
 
+    SkillDisplay\PHPToolKit\Api\Campaigns:
+        arguments:
+            $settings: '@skilldisplay.settings'
+
     SkillDisplay\PHPToolKit\Verification\Link:
         public: true
         arguments:

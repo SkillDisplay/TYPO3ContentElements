@@ -21,6 +21,8 @@ namespace SkillDisplay\Typo3Extension\Tests\Unit\ViewHelpers\Verification;
  * 02110-1301, USA.
  */
 
+use Prophecy\PhpUnit\ProphecyTrait;
+use Prophecy\Prophecy\ObjectProphecy;
 use SkillDisplay\PHPToolKit\Verification\Link;
 use SkillDisplay\Typo3Extension\ViewHelpers\Verification\UrlViewHelper;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
@@ -33,6 +35,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase as TestCase;
  */
 class UrlViewHelperTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * @test
      */
@@ -47,6 +51,7 @@ class UrlViewHelperTest extends TestCase
             [
                 'skill' => 10,
                 'skillSet' => 10,
+                'campaign' => 0,
             ],
             function () {
             },
@@ -79,14 +84,17 @@ class UrlViewHelperTest extends TestCase
     public function returnsRenderedUrlForSkill(): void
     {
         $renderingContext = $this->prophesize(RenderingContextInterface::class);
+        /** @var Link|ObjectProphecy $link */
         $link = $this->prophesize(Link::class);
-        $link->getVerificationLink('self', 10, Link::SKILL)->willReturn('https://example.com/path/to/verification');
+        $link->getVerificationLink('self', 10, Link::SKILL, 0)
+            ->willReturn('https://example.com/path/to/verification');
         GeneralUtility::addInstance(Link::class, $link->reveal());
 
         $result = UrlViewHelper::renderStatic(
             [
                 'skill' => 10,
                 'type' => 'self',
+                'campaign' => 0,
             ],
             function () {
             },
@@ -101,14 +109,17 @@ class UrlViewHelperTest extends TestCase
     public function returnsRenderedUrlForSkillSet(): void
     {
         $renderingContext = $this->prophesize(RenderingContextInterface::class);
+        /** @var Link|ObjectProphecy $link */
         $link = $this->prophesize(Link::class);
-        $link->getVerificationLink('self', 10, Link::SKILL_SET)->willReturn('https://example.com/path/to/verification');
+        $link->getVerificationLink('self', 10, Link::SKILL_SET, 0)
+            ->willReturn('https://example.com/path/to/verification');
         GeneralUtility::addInstance(Link::class, $link->reveal());
 
         $result = UrlViewHelper::renderStatic(
             [
                 'skillSet' => 10,
                 'type' => 'self',
+                'campaign' => 0,
             ],
             function () {
             },
