@@ -34,7 +34,8 @@ class ButtonViewHelper extends VerificationViewHelper
         return $link->getVerificationButton(
             $arguments['type'],
             static::getId($arguments),
-            static::getType($arguments)
+            static::getType($arguments),
+            $arguments['campaign']
         );
     }
 }

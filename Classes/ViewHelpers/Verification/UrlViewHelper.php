@@ -34,7 +34,8 @@ class UrlViewHelper extends VerificationViewHelper
         return $link->getVerificationLink(
             $arguments['type'],
             static::getId($arguments),
-            static::getType($arguments)
+            static::getType($arguments),
+            $arguments['campaign']
         );
     }
 }
