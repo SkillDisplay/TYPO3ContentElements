@@ -1,23 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-    <file source-language="en" datatype="plaintext" original="messages">
-        <header/>
-        <body>
-            <trans-unit id="tt_content.skilldisplay_skills">
-                <source>SkillDisplay: Skills</source>
-            </trans-unit>
-            <trans-unit id="tt_content.skilldisplay_skills.description">
-                <source>Comma separated list of UIDs.</source>
-            </trans-unit>
-            <trans-unit id="tt_content.skilldisplay_skillset">
-                <source>SkillDisplay: SkillSet</source>
-            </trans-unit>
-            <trans-unit id="tt_content.skilldisplay_skillset.description">
-                <source>UID of SkillSet</source>
-            </trans-unit>
-            <trans-unit id="tt_content.CType.itemGroups.skilldisplay">
-                <source>SkillDisplay</source>
-            </trans-unit>
-        </body>
-    </file>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+   <file source-language="en" datatype="plaintext" original="messages" date="2020-11-27T22:38:17+01:00" product-name="skilldisplay">
+      <body>
+         <trans-unit id="tt_content.CType.itemGroups.skilldisplay" resname="tt_content.CType.itemGroups.skilldisplay">
+            <source>SkillDisplay</source>
+         </trans-unit>
+         <trans-unit id="tt_content.skilldisplay_skills" resname="tt_content.skilldisplay_skills">
+            <source>SkillDisplay: Skills</source>
+         </trans-unit>
+         <trans-unit id="tt_content.skilldisplay_skills.description" resname="tt_content.skilldisplay_skills.description">
+            <source>Comma separated list of UIDs.</source>
+         </trans-unit>
+         <trans-unit id="tt_content.skilldisplay_skillset" resname="tt_content.skilldisplay_skillset">
+            <source>SkillDisplay: SkillSet</source>
+         </trans-unit>
+         <trans-unit id="tt_content.skilldisplay_skillset.description" resname="tt_content.skilldisplay_skillset.description">
+            <source>UID of SkillSet</source>
+         </trans-unit>
+      </body>
+   </file>
 </xliff>

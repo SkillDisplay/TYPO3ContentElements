@@ -1,30 +1,28 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
-<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-    <file source-language="en" datatype="plaintext" original="messages">
-        <header/>
-        <body>
-            <trans-unit id="newContentElement.skilldisplay.header">
-                <source>SkillDisplay</source>
-            </trans-unit>
-            <trans-unit id="newContentElement.skilldisplay.skills.description">
-                <source>Renders one or multiple skills.</source>
-            </trans-unit>
-            <trans-unit id="newContentElement.skilldisplay.skillset.description">
-                <source>Renders one skillset.</source>
-            </trans-unit>
-
-            <trans-unit id="site.div.skilldisplay">
-                <source>SkillDisplay</source>
-            </trans-unit>
-            <trans-unit id="site.skilldisplay_user_secret">
-                <source>User secret</source>
-            </trans-unit>
-            <trans-unit id="site.skilldisplay_api_key">
-                <source>API Key</source>
-            </trans-unit>
-            <trans-unit id="site.skilldisplay_verifier_id">
-                <source>Verifier ID</source>
-            </trans-unit>
-        </body>
-    </file>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+   <file source-language="en" datatype="plaintext" original="messages" date="2020-11-27T22:38:17+01:00" product-name="skilldisplay">
+      <body>
+         <trans-unit id="newContentElement.skilldisplay.header" resname="newContentElement.skilldisplay.header">
+            <source>SkillDisplay</source>
+         </trans-unit>
+         <trans-unit id="newContentElement.skilldisplay.skills.description" resname="newContentElement.skilldisplay.skills.description">
+            <source>Renders one or multiple skills.</source>
+         </trans-unit>
+         <trans-unit id="newContentElement.skilldisplay.skillset.description" resname="newContentElement.skilldisplay.skillset.description">
+            <source>Renders one skillset.</source>
+         </trans-unit>
+         <trans-unit id="site.div.skilldisplay" resname="site.div.skilldisplay">
+            <source>SkillDisplay</source>
+         </trans-unit>
+         <trans-unit id="site.skilldisplay_api_key" resname="site.skilldisplay_api_key">
+            <source>API Key</source>
+         </trans-unit>
+         <trans-unit id="site.skilldisplay_campaign" resname="site.skilldisplay_campaign">
+            <source>Campaign for verifications</source>
+         </trans-unit>
+         <trans-unit id="site.skilldisplay_user_secret" resname="site.skilldisplay_user_secret">
+            <source>User secret</source>
+         </trans-unit>
+      </body>
+   </file>
 </xliff>
