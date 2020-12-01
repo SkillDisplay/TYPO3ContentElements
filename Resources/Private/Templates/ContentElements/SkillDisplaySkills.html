@@ -6,7 +6,7 @@
             title: skill.title,
             detailUrl: 'https://my.skilldisplay.eu/skill/{skill.id}/0',
             brandLogoUrl: skill.brands.0.logoPublicUrl,
-            verificationUrl: '{sd:verification.url(skill: skill.id)}',
+            verificationUrl: '{sd:verification.url(skill: skill.id, campaign: data.skilldisplay_campaign)}',
             description: skill.description
         })}
     </f:for>

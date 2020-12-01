@@ -21,6 +21,7 @@ namespace SkillDisplay\Typo3Extension\Tests\Unit;
  * 02110-1301, USA.
  */
 
+use Prophecy\PhpUnit\ProphecyTrait;
 use SkillDisplay\PHPToolKit\Configuration\Settings;
 use SkillDisplay\Typo3Extension\SettingsFactory;
 use TYPO3\CMS\Core\Http\ServerRequest;
@@ -32,6 +33,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase as TestCase;
  */
 class SettingsFactoryTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * @test
      */

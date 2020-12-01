@@ -16,7 +16,7 @@
                         </f:then>
                         <f:else>
                             <strong>{skill.title}</strong><br>
-                            {sd:verification.url(skill: skill.id)}
+                            {sd:verification.url(skill: skill.id, campaign: skilldisplay_campaign)}
                         </f:else>
                     </f:if>
                 </li>

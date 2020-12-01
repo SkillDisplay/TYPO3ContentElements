@@ -15,6 +15,7 @@
                     '--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general',
                     '--palette--;;general',
                     'skilldisplay_skillset',
+                    'skilldisplay_campaign',
                     '--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.appearance',
                     '--palette--;;frames',
                     '--palette--;;appearanceLinks',

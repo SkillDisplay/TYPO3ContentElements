@@ -38,6 +38,7 @@ abstract class VerificationViewHelper extends AbstractViewHelper
         $this->registerArgument('skill', 'integer', 'ID of the Skill.');
         $this->registerArgument('skillSet', 'integer', 'ID of the SkillSet.');
         $this->registerArgument('type', 'string', 'Type of verification', false, 'self');
+        $this->registerArgument('campaign', 'int', 'ID of campaign', false, 0);
     }
 
     public static function renderStatic(

@@ -21,6 +21,7 @@ namespace SkillDisplay\Typo3Extension\Tests\Unit\Backend;
  * 02110-1301, USA.
  */
 
+use Prophecy\PhpUnit\ProphecyTrait;
 use SkillDisplay\PHPToolKit\Api\Skill;
 use SkillDisplay\PHPToolKit\Api\SkillSet;
 use SkillDisplay\PHPToolKit\Entity\Skill as SkillEntity;
@@ -34,6 +35,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase as TestCase;
  */
 class PreviewTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * @test
      */
