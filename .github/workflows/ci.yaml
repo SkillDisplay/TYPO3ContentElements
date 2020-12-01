@@ -70,6 +70,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-composer-
 
+      - name: Keep composer v1 until all dev dependencies are v2 ready
+        run: sudo composer selfupdate --1
+
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress --no-suggest --no-plugins
 
@@ -138,6 +141,9 @@ jobs:
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
             ${{ runner.os }}-composer-
+
+      - name: Keep composer v1 until all dev dependencies are v2 ready
+        run: sudo composer selfupdate --1
 
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress --no-suggest
