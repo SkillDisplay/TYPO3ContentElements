@@ -34,6 +34,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
+
       - name: Get Composer Cache Directory
         id: composer-cache
         run: |
@@ -57,6 +62,11 @@ jobs:
     needs: [check-composer]
     steps:
       - uses: actions/checkout@v2
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
 
       - name: Get Composer Cache Directory
         id: composer-cache
@@ -84,6 +94,11 @@ jobs:
     needs: [check-composer]
     steps:
       - uses: actions/checkout@v2
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
 
       - name: Install xmllint
         run: sudo apt-get install libxml2-utils
@@ -157,6 +172,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
+
       - name: Get Composer Cache Directory
         id: composer-cache
         run: |
@@ -180,6 +200,11 @@ jobs:
     needs: [check-dependencies]
     steps:
       - uses: actions/checkout@v2
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
 
       - name: Get Composer Cache Directory
         id: composer-cache
