@@ -25,9 +25,22 @@ namespace SkillDisplay\Typo3Extension;
 
 use SkillDisplay\PHPToolKit\Configuration\Settings;
 use TYPO3\CMS\Core\Http\ServerRequest;
+use TYPO3\CMS\Core\Site\Entity\Site;
+use TYPO3\CMS\Core\Site\SiteFinder;
 
 class SettingsFactory
 {
+    /**
+     * @var SiteFinder
+     */
+    private $siteFinder;
+
+    public function __construct(
+        SiteFinder $siteFinder
+    ) {
+        $this->siteFinder = $siteFinder;
+    }
+
     public function createFromCurrentSiteConfiguration(): Settings
     {
         $site = $this->getRequest()->getAttribute('site');
@@ -35,6 +48,18 @@ class SettingsFactory
             throw new \Exception('Could not determine current site.', 1599721652);
         }
 
+        return $this->createFromSite($site);
+    }
+
+    public function createFromPageUid(int $pageUid): Settings
+    {
+        $site = $this->siteFinder->getSiteByPageId($pageUid);
+
+        return $this->createFromSite($site);
+    }
+
+    private function createFromSite(Site $site): Settings
+    {
         $config = $site->getConfiguration();
 
         return new Settings(

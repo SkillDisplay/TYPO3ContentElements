@@ -31,7 +31,8 @@
         "skilldisplay/phptoolkit": "^1.2",
         "typo3/cms-backend": "^10.4",
         "typo3/cms-frontend": "^10.4",
-        "typo3fluid/fluid": "^2.6"
+        "typo3fluid/fluid": "^2.6",
+        "guzzlehttp/guzzle": "^6.5"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.5",

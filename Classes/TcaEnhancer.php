@@ -4,19 +4,30 @@ declare(strict_types=1);
 
 namespace SkillDisplay\Typo3Extension;
 
-use SkillDisplay\PHPToolKit\Api\Campaigns;
 use SkillDisplay\PHPToolKit\Entity\Campaign;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class TcaEnhancer
 {
-    public function getCampaignsForTCA(array $params): void
+    /**
+     * @var CampaignsFactory
+     */
+    private $campaignsFactory;
+
+    public function __construct(
+        CampaignsFactory $campaignsFactory
+    ) {
+        $this->campaignsFactory = $campaignsFactory;
+    }
+
+    public function getCampaignsForTCA(array &$params): void
     {
         $params['items'] = [
             ['', 0],
         ];
 
-        $campaigns = GeneralUtility::makeInstance(Campaigns::class)->getForUser();
+        $campaigns = $this->campaignsFactory
+            ->createFromPageUid($params['row']['pid'])
+            ->getForUser();
         /** @var Campaign $campaign */
         foreach ($campaigns as $campaign) {
             $params['items'][] = [
