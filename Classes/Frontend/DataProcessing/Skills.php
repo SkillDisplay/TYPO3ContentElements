@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SkillDisplay\Typo3Extension\Frontend\DataProcessing;
 
 /*
