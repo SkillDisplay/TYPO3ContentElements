@@ -9,4 +9,8 @@
     <file>ext_localconf.php</file>
 
     <rule ref="PSR12" />
+    <rule ref="Generic.PHP.RequireStrictTypes">
+        <exclude-pattern>ext_*.php</exclude-pattern>
+        <exclude-pattern>Configuration/*</exclude-pattern>
+    </rule>
 </ruleset>
