@@ -37,10 +37,11 @@
                 'config' => [
                     'type' => 'select',
                     'renderType' => 'selectSingle',
-                    'itemsProcFunc' => \SkillDisplay\Typo3Extension\TcaEnhancer::class . '->' . 'getCampaignsForTCA',
+                    'itemsProcFunc' => \SkillDisplay\SkilldisplayContent\TcaEnhancer::class
+                        . '->' . 'getCampaignsForTCA',
                     'items' => []
                 ]
             ],
         ],
     ]);
-})('skilldisplay', 'tt_content');
+})('skilldisplay_content', 'tt_content');

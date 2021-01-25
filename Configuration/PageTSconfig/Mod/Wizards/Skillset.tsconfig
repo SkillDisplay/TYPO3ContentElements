@@ -3,13 +3,13 @@ mod {
         elements {
             skilldisplay_skillset {
                 iconIdentifier = skilldisplay-skillset
-                title = LLL:EXT:skilldisplay/Resources/Private/Language/locallang_tca.xlf:tt_content.skilldisplay_skillset
-                description = LLL:EXT:skilldisplay/Resources/Private/Language/locallang_be.xlf:newContentElement.skilldisplay.skillset.description
+                title = LLL:EXT:skilldisplay_content/Resources/Private/Language/locallang_tca.xlf:tt_content.skilldisplay_skillset
+                description = LLL:EXT:skilldisplay_content/Resources/Private/Language/locallang_be.xlf:newContentElement.skilldisplay.skillset.description
                 tt_content_defValues {
                     CType = skilldisplay_skillset
                 }
             }
         }
     }
-    web_layout.tt_content.preview.skilldisplay_skillset = EXT:skilldisplay/Resources/Private/Templates/Backend/ContentElements/Skillset.html
+    web_layout.tt_content.preview.skilldisplay_skillset = EXT:skilldisplay_content/Resources/Private/Templates/Backend/ContentElements/Skillset.html
 }

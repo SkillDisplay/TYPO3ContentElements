@@ -6,4 +6,4 @@
         'Configuration/TypoScript/',
         'SkillDisplay'
     );
-})('skilldisplay', 'sys_template');
+})('skilldisplay_content', 'sys_template');

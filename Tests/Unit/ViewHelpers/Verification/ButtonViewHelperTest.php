@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SkillDisplay\Typo3Extension\Tests\Unit\ViewHelpers\Verification;
+namespace SkillDisplay\SkilldisplayContent\Tests\Unit\ViewHelpers\Verification;
 
 /*
  * Copyright (C) 2020 Daniel Siepmann <coding@daniel-siepmann.de>
@@ -26,14 +26,14 @@ namespace SkillDisplay\Typo3Extension\Tests\Unit\ViewHelpers\Verification;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use SkillDisplay\PHPToolKit\Verification\Link;
-use SkillDisplay\Typo3Extension\ViewHelpers\Verification\ButtonViewHelper;
+use SkillDisplay\SkilldisplayContent\ViewHelpers\Verification\ButtonViewHelper;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase as TestCase;
 
 /**
- * @covers SkillDisplay\Typo3Extension\ViewHelpers\Verification\ButtonViewHelper
- * @covers SkillDisplay\Typo3Extension\ViewHelpers\VerificationViewHelper
+ * @covers SkillDisplay\SkilldisplayContent\ViewHelpers\Verification\ButtonViewHelper
+ * @covers SkillDisplay\SkilldisplayContent\ViewHelpers\VerificationViewHelper
  */
 class ButtonViewHelperTest extends TestCase
 {

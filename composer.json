@@ -17,12 +17,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "SkillDisplay\\Typo3Extension\\": "Classes/"
+            "SkillDisplay\\SkilldisplayContent\\": "Classes/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "SkillDisplay\\Typo3Extension\\Tests\\": "Tests/"
+            "SkillDisplay\\SkilldisplayContent\\Tests\\": "Tests/"
         }
     },
     "require": {
@@ -48,14 +48,13 @@
     "prefer-stable": true,
     "scripts": {
         "post-autoload-dump": [
-            "mkdir -p .Build/web/typo3conf/ext/",
-            "[ -L .Build/web/typo3conf/ext/skilldisplay ] || ln -snvf ../../../../. .Build/web/typo3conf/ext/skilldisplay"
+            "TYPO3\\TestingFramework\\Composer\\ExtensionTestEnvironment::prepare"
         ]
     },
     "extra": {
         "typo3/cms": {
             "cms-package-dir": "{$vendor-dir}/typo3/cms",
-            "extension-key": "skilldisplay",
+            "extension-key": "skilldisplay_content",
             "web-dir": ".Build/web"
         },
         "branch-alias": {

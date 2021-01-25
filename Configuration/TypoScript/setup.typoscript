@@ -3,7 +3,7 @@ tt_content.skilldisplay_skills {
     templateName = SkillDisplaySkills
 
     dataProcessing {
-        10 = SkillDisplay\Typo3Extension\Frontend\DataProcessing\Skills
+        10 = SkillDisplay\SkilldisplayContent\Frontend\DataProcessing\Skills
         10 {
             skills.field = skilldisplay_skills
         }
@@ -15,7 +15,7 @@ tt_content.skilldisplay_skillset {
     templateName = SkillDisplaySkillSet
 
     dataProcessing {
-        10 = SkillDisplay\Typo3Extension\Frontend\DataProcessing\SkillSets
+        10 = SkillDisplay\SkilldisplayContent\Frontend\DataProcessing\SkillSets
         10 {
             skillSets.field = skilldisplay_skillset
         }
@@ -24,6 +24,6 @@ tt_content.skilldisplay_skillset {
 
 page {
     includeCSS {
-        skilldisplay = EXT:skilldisplay/Resources/Public/Css/Styles.css
+        skilldisplay = EXT:skilldisplay_content/Resources/Public/Css/Styles.css
     }
 }

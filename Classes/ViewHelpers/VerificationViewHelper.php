@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SkillDisplay\Typo3Extension\ViewHelpers;
+namespace SkillDisplay\SkilldisplayContent\ViewHelpers;
 
 /*
  * Copyright (C) 2020 Daniel Siepmann <coding@daniel-siepmann.de>
@@ -27,7 +27,6 @@ use SkillDisplay\PHPToolKit\Verification\Link;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 abstract class VerificationViewHelper extends AbstractViewHelper
 {
