@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SkillDisplay\Typo3Extension\Tests\Unit;
+namespace SkillDisplay\SkilldisplayContent\Tests\Unit;
 
 /*
  * Copyright (C) 2020 Daniel Siepmann <coding@daniel-siepmann.de>
@@ -25,14 +25,14 @@ namespace SkillDisplay\Typo3Extension\Tests\Unit;
 
 use Prophecy\PhpUnit\ProphecyTrait;
 use SkillDisplay\PHPToolKit\Configuration\Settings;
-use SkillDisplay\Typo3Extension\SettingsFactory;
+use SkillDisplay\SkilldisplayContent\SettingsFactory;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase as TestCase;
 
 /**
- * @covers SkillDisplay\Typo3Extension\SettingsFactory
+ * @covers SkillDisplay\SkilldisplayContent\SettingsFactory
  */
 class SettingsFactoryTest extends TestCase
 {

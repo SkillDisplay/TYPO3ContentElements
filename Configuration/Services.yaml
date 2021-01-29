@@ -4,17 +4,17 @@ services:
         autoconfigure: true
         public: false
 
-    SkillDisplay\Typo3Extension\:
+    SkillDisplay\SkilldisplayContent\:
         resource: '../Classes/*'
 
-    SkillDisplay\Typo3Extension\Frontend\DataProcessing\:
+    SkillDisplay\SkilldisplayContent\Frontend\DataProcessing\:
         resource: '../Classes/Frontend/DataProcessing/*'
         public: true
 
     skilldisplay.settings:
         class: 'SkillDisplay\PHPToolKit\Configuration\Settings'
         factory:
-            - '@SkillDisplay\Typo3Extension\SettingsFactory'
+            - '@SkillDisplay\SkilldisplayContent\SettingsFactory'
             - 'createFromCurrentSiteConfiguration'
 
     SkillDisplay\PHPToolKit\Configuration\Settings:
@@ -37,7 +37,7 @@ services:
         arguments:
             $settings: '@skilldisplay.settings'
 
-    SkillDisplay\Typo3Extension\Backend\Preview:
+    SkillDisplay\SkilldisplayContent\Backend\Preview:
         public: true
 
     SkillDisplay\Typo3Extension\TcaEnhancer:

@@ -41,7 +41,6 @@
             $languagePath . $contentType,
             $contentType,
             'skilldisplay-skill',
-            'skilldisplay'
         ]
     );
-})('skilldisplay', 'tt_content', 'skilldisplay_skills');
+})('skilldisplay_content', 'tt_content', 'skilldisplay_skills');

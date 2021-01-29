@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SkillDisplay\Typo3Extension\Tests\Unit\Backend;
+namespace SkillDisplay\SkilldisplayContent\Tests\Unit\Backend;
 
 /*
  * Copyright (C) 2020 Daniel Siepmann <coding@daniel-siepmann.de>
@@ -28,12 +28,12 @@ use SkillDisplay\PHPToolKit\Api\Skill;
 use SkillDisplay\PHPToolKit\Api\SkillSet;
 use SkillDisplay\PHPToolKit\Entity\Skill as SkillEntity;
 use SkillDisplay\PHPToolKit\Entity\SkillSet as SkillSetEntity;
-use SkillDisplay\Typo3Extension\Backend\Preview;
+use SkillDisplay\SkilldisplayContent\Backend\Preview;
 use TYPO3\CMS\Backend\View\PageLayoutView;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase as TestCase;
 
 /**
- * @covers SkillDisplay\Typo3Extension\Backend\Preview
+ * @covers SkillDisplay\SkilldisplayContent\Backend\Preview
  */
 class PreviewTest extends TestCase
 {

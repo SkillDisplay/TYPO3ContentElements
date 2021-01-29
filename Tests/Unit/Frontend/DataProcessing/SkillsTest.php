@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SkillDisplay\Typo3Extension\Tests\Unit\Frontend\DataProcessing;
+namespace SkillDisplay\SkilldisplayContent\Tests\Unit\Frontend\DataProcessing;
 
 /*
  * Copyright (C) 2020 Daniel Siepmann <coding@daniel-siepmann.de>
@@ -26,12 +26,12 @@ namespace SkillDisplay\Typo3Extension\Tests\Unit\Frontend\DataProcessing;
 use Prophecy\PhpUnit\ProphecyTrait;
 use SkillDisplay\PHPToolKit\Api\Skill;
 use SkillDisplay\PHPToolKit\Entity\Skill as SkillEntity;
-use SkillDisplay\Typo3Extension\Frontend\DataProcessing\Skills;
+use SkillDisplay\SkilldisplayContent\Frontend\DataProcessing\Skills;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase as TestCase;
 
 /**
- * @covers SkillDisplay\Typo3Extension\Frontend\DataProcessing\Skills
+ * @covers SkillDisplay\SkilldisplayContent\Frontend\DataProcessing\Skills
  */
 class SkillsTest extends TestCase
 {

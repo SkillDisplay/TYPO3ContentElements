@@ -36,4 +36,4 @@
             ],
         ],
     ]);
-})('skilldisplay', 'site');
+})('skilldisplay_content', 'site');

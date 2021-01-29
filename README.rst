@@ -29,14 +29,14 @@ The TypoScript contains the rendering definition for provided content elements.
 
 Next Step: Copy Templates or adjust template paths via TypoScript.
 In order to allow TYPO3 to find the Fluid templates for content elements,
-either add the path `EXT:skilldisplay/Resources/Private/Templates/ContentElements/` in TypoScript, e.g.::
+either add the path `EXT:skilldisplay_content/Resources/Private/Templates/ContentElements/` in TypoScript, e.g.::
 
    lib.contentElement {
        partialRootPaths {
-           50 = EXT:skilldisplay/Resources/Private/Partials/ContentElements/
+           50 = EXT:skilldisplay_content/Resources/Private/Partials/ContentElements/
        }
        templateRootPaths {
-           50 = EXT:skilldisplay/Resources/Private/Templates/ContentElements/
+           50 = EXT:skilldisplay_content/Resources/Private/Templates/ContentElements/
        }
    }
 

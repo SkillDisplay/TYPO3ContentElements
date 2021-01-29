@@ -1,1 +1,1 @@
-@import 'EXT:skilldisplay/Configuration/PageTSconfig/Mod/Wizards/*.tsconfig'
+@import 'EXT:skilldisplay_content/Configuration/PageTSconfig/Mod/Wizards/*.tsconfig'

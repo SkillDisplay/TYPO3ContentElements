@@ -23,5 +23,5 @@
     }
 
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['cms/layout/class.tx_cms_layout.php']['tt_content_drawItem'][$extKey] =
-        \SkillDisplay\Typo3Extension\Backend\Preview::class;
-})('skilldisplay');
+        \SkillDisplay\SkilldisplayContent\Backend\Preview::class;
+})('skilldisplay_content');

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SkillDisplay\Typo3Extension;
+namespace SkillDisplay\SkilldisplayContent;
 
 use SkillDisplay\PHPToolKit\Entity\Campaign;
 

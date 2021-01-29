@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SkillDisplay\Typo3Extension\ViewHelpers\Verification;
+namespace SkillDisplay\SkilldisplayContent\ViewHelpers\Verification;
 
 /*
  * Copyright (C) 2020 Daniel Siepmann <coding@daniel-siepmann.de>
@@ -24,7 +24,7 @@ namespace SkillDisplay\Typo3Extension\ViewHelpers\Verification;
  */
 
 use SkillDisplay\PHPToolKit\Verification\Link;
-use SkillDisplay\Typo3Extension\ViewHelpers\VerificationViewHelper;
+use SkillDisplay\SkilldisplayContent\ViewHelpers\VerificationViewHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class UrlViewHelper extends VerificationViewHelper
