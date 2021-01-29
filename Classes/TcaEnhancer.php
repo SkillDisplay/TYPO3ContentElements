@@ -26,7 +26,7 @@ class TcaEnhancer
         ];
 
         $campaigns = $this->campaignsFactory
-            ->createFromPageUid($params['row']['pid'])
+            ->createFromPageUid(abs($params['row']['pid']))
             ->getForUser();
         /** @var Campaign $campaign */
         foreach ($campaigns as $campaign) {
