@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace SkillDisplay\SkilldisplayContent;
 
 use SkillDisplay\PHPToolKit\Entity\Campaign;
+use TYPO3\CMS\Backend\Utility\BackendUtility;
 
 class TcaEnhancer
 {
@@ -25,15 +26,16 @@ class TcaEnhancer
             ['', 0],
         ];
 
-        $campaigns = $this->campaignsFactory
-            ->createFromPageUid($params['row']['pid'])
-            ->getForUser();
-        /** @var Campaign $campaign */
-        foreach ($campaigns as $campaign) {
-            $params['items'][] = [
-                $campaign->getTitle(),
-                $campaign->getId(),
-            ];
+        $pid = BackendUtility::getTSconfig_pidValue('tt_content', $params['row']['uid'], $params['row']['pid']);
+        if ($pid > 0) {
+            $campaigns = $this->campaignsFactory->createFromPageUid($pid)->getForUser();
+            /** @var Campaign $campaign */
+            foreach ($campaigns as $campaign) {
+                $params['items'][] = [
+                    $campaign->getTitle(),
+                    $campaign->getId(),
+                ];
+            }
         }
     }
 }
