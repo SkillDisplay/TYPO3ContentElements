@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SkillDisplay\Typo3Extension\Tests\Unit;
+namespace SkillDisplay\SkilldisplayContent\Tests\Unit;
 
 /*
  * Copyright (C) 2021 Daniel Siepmann <coding@daniel-siepmann.de>
@@ -27,11 +27,11 @@ use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use SkillDisplay\PHPToolKit\Api\Campaigns;
 use SkillDisplay\PHPToolKit\Entity\Campaign;
-use SkillDisplay\Typo3Extension\CampaignsFactory;
-use SkillDisplay\Typo3Extension\TcaEnhancer;
+use SkillDisplay\SkilldisplayContent\CampaignsFactory;
+use SkillDisplay\SkilldisplayContent\TcaEnhancer;
 
 /**
- * @covers SkillDisplay\Typo3Extension\TcaEnhancer
+ * @covers SkillDisplay\SkilldisplayContent\TcaEnhancer
  */
 class TcaEnhancerTest extends TestCase
 {

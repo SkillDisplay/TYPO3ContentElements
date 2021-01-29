@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SkillDisplay\Typo3Extension;
+namespace SkillDisplay\SkilldisplayContent;
 
 /*
  * Copyright (C) 2021 Daniel Siepmann <coding@daniel-siepmann.de>
@@ -25,7 +25,6 @@ namespace SkillDisplay\Typo3Extension;
 
 use GuzzleHttp\Client;
 use SkillDisplay\PHPToolKit\Api\Campaigns;
-use SkillDisplay\Typo3Extension\SettingsFactory;
 
 class CampaignsFactory
 {
