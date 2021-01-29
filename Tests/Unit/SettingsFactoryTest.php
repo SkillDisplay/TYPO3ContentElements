@@ -28,6 +28,7 @@ use SkillDisplay\PHPToolKit\Configuration\Settings;
 use SkillDisplay\Typo3Extension\SettingsFactory;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Site\Entity\Site;
+use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase as TestCase;
 
 /**
@@ -42,15 +43,18 @@ class SettingsFactoryTest extends TestCase
      */
     public function instanceCanBeCreated(): void
     {
-        $subject = new SettingsFactory();
+        $siteFinder = $this->prophesize(SiteFinder::class);
+        $subject = new SettingsFactory($siteFinder->reveal());
         static::assertInstanceOf(SettingsFactory::class, $subject);
     }
 
     /**
      * @test
      */
-    public function returnsDefaultSettingsIfNothingIsConfigured(): void
+    public function returnsDefaultSettingsIfNothingIsConfiguredInCurrentSite(): void
     {
+        $siteFinder = $this->prophesize(SiteFinder::class);
+
         $site = $this->prophesize(Site::class);
         $site->getConfiguration()->willReturn([]);
 
@@ -58,7 +62,7 @@ class SettingsFactoryTest extends TestCase
         $request->getAttribute('site')->willReturn($site->reveal());
 
         $GLOBALS['TYPO3_REQUEST'] = $request->reveal();
-        $subject = new SettingsFactory();
+        $subject = new SettingsFactory($siteFinder->reveal());
 
         $settings = $subject->createFromCurrentSiteConfiguration();
         static::assertInstanceOf(Settings::class, $settings);
@@ -74,6 +78,8 @@ class SettingsFactoryTest extends TestCase
      */
     public function returnsSettingsFromCurrentSite(): void
     {
+        $siteFinder = $this->prophesize(SiteFinder::class);
+
         $site = $this->prophesize(Site::class);
         $site->getConfiguration()->willReturn([
             'skilldisplay_api_key' => '---YOUR-API-KEY---',
@@ -85,7 +91,7 @@ class SettingsFactoryTest extends TestCase
         $request->getAttribute('site')->willReturn($site->reveal());
 
         $GLOBALS['TYPO3_REQUEST'] = $request->reveal();
-        $subject = new SettingsFactory();
+        $subject = new SettingsFactory($siteFinder->reveal());
 
         $settings = $subject->createFromCurrentSiteConfiguration();
         static::assertInstanceOf(Settings::class, $settings);
@@ -101,14 +107,64 @@ class SettingsFactoryTest extends TestCase
      */
     public function throwsExceptionIfCurrentSiteCanNotBeFetched(): void
     {
+        $siteFinder = $this->prophesize(SiteFinder::class);
+
         $request = $this->prophesize(ServerRequest::class);
         $request->getAttribute('site')->willReturn(null);
 
         $GLOBALS['TYPO3_REQUEST'] = $request->reveal();
-        $subject = new SettingsFactory();
+        $subject = new SettingsFactory($siteFinder->reveal());
 
         $this->expectExceptionMessage('Could not determine current site.');
         $this->expectExceptionCode(1599721652);
         $subject->createFromCurrentSiteConfiguration();
+    }
+
+    /**
+     * @test
+     */
+    public function returnsDefaultSettingsIfNothingIsConfiguredForPageUidBasesSite(): void
+    {
+        $site = $this->prophesize(Site::class);
+        $site->getConfiguration()->willReturn([]);
+
+        $siteFinder = $this->prophesize(SiteFinder::class);
+        $siteFinder->getSiteByPageId(10)->willReturn($site->reveal());
+
+        $subject = new SettingsFactory($siteFinder->reveal());
+
+        $settings = $subject->createFromPageUid(10);
+        static::assertInstanceOf(Settings::class, $settings);
+        static::assertSame(0, $settings->getVerifierID());
+        static::assertSame('', $settings->getUserSecret());
+        static::assertSame('', $settings->getApiKey());
+        static::assertSame('https://www.skilldisplay.eu', $settings->getAPIUrl());
+        static::assertSame('https://my.skilldisplay.eu', $settings->getMySkillDisplayUrl());
+    }
+
+    /**
+     * @test
+     */
+    public function returnsSettingsFromPageUidBasedSite(): void
+    {
+        $site = $this->prophesize(Site::class);
+        $site->getConfiguration()->willReturn([
+            'skilldisplay_api_key' => '---YOUR-API-KEY---',
+            'skilldisplay_verifier_id' => 10,
+            'skilldisplay_user_secret' => '---USER-SECRET---',
+        ]);
+
+        $siteFinder = $this->prophesize(SiteFinder::class);
+        $siteFinder->getSiteByPageId(10)->willReturn($site->reveal());
+
+        $subject = new SettingsFactory($siteFinder->reveal());
+
+        $settings = $subject->createFromPageUid(10);
+        static::assertInstanceOf(Settings::class, $settings);
+        static::assertSame(10, $settings->getVerifierID());
+        static::assertSame('---USER-SECRET---', $settings->getUserSecret());
+        static::assertSame('---YOUR-API-KEY---', $settings->getApiKey());
+        static::assertSame('https://www.skilldisplay.eu', $settings->getAPIUrl());
+        static::assertSame('https://my.skilldisplay.eu', $settings->getMySkillDisplayUrl());
     }
 }

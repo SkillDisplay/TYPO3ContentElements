@@ -17,6 +17,12 @@
          <trans-unit id="tt_content.skilldisplay_skillset.description" resname="tt_content.skilldisplay_skillset.description">
             <source>UID of SkillSet</source>
          </trans-unit>
+         <trans-unit id="tt_content.skilldisplay_campaign" resname="tt_content.skilldisplay_campaign">
+            <source>Campaign</source>
+         </trans-unit>
+         <trans-unit id="tt_content.skilldisplay_campaign.description" resname="tt_content.skilldisplay_campaign.description">
+            <source>Fetched from API.</source>
+         </trans-unit>
       </body>
    </file>
 </xliff>

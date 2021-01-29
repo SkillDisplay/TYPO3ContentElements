@@ -39,3 +39,6 @@ services:
 
     SkillDisplay\Typo3Extension\Backend\Preview:
         public: true
+
+    SkillDisplay\Typo3Extension\TcaEnhancer:
+        public: true

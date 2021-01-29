@@ -33,7 +33,9 @@
                 ],
             ],
             'skilldisplay_campaign' => [
+                'exclude' => 1,
                 'label' => $languagePath . 'skilldisplay_campaign',
+                'description' => $languagePath . 'skilldisplay_campaign.description',
                 'config' => [
                     'type' => 'select',
                     'renderType' => 'selectSingle',
