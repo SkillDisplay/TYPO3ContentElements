@@ -23,8 +23,10 @@ namespace SkillDisplay\SkilldisplayContent\Tests\Unit;
  * 02110-1301, USA.
  */
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
+use Prophecy\Prophecy\ObjectProphecy;
 use SkillDisplay\PHPToolKit\Api\Campaigns;
 use SkillDisplay\PHPToolKit\Entity\Campaign;
 use SkillDisplay\SkilldisplayContent\CampaignsFactory;
@@ -42,6 +44,7 @@ class TcaEnhancerTest extends TestCase
      */
     public function instanceCanBeCreated(): void
     {
+        /** @var CampaignsFactory|ObjectProphecy $campaignsFactory */
         $campaignsFactory = $this->prophesize(CampaignsFactory::class);
         $subject = new TcaEnhancer(
             $campaignsFactory->reveal()
@@ -59,17 +62,23 @@ class TcaEnhancerTest extends TestCase
             'row' => [
                 'pid' => 10,
             ],
+            'items' => [],
         ];
 
+        /** @var Campaigns|ObjectProphecy $campaigns */
         $campaigns = $this->prophesize(Campaigns::class);
         $campaigns->getForUser()->willReturn([]);
 
+        /** @var CampaignsFactory|ObjectProphecy $campaignsFactory */
         $campaignsFactory = $this->prophesize(CampaignsFactory::class);
         $campaignsFactory->createFromPageUid(10)->willReturn($campaigns->reveal());
 
-        $subject = new TcaEnhancer(
-            $campaignsFactory->reveal()
-        );
+        /** @var TcaEnhancer|MockObject $subject */
+        $subject = $this->getMockBuilder(TcaEnhancer::class)
+            ->onlyMethods(['resolvePid'])
+            ->setConstructorArgs([$campaignsFactory->reveal()])
+            ->getMock();
+        $subject->expects(self::any())->method('resolvePid')->willReturn(10);
         $subject->getCampaignsForTCA($parameters);
 
         self::assertArrayHasKey('items', $parameters);
@@ -87,27 +96,35 @@ class TcaEnhancerTest extends TestCase
             'row' => [
                 'pid' => 10,
             ],
+            'items' => [],
         ];
 
+        /** @var Campaign|ObjectProphecy $campaign1 */
         $campaign1 = $this->prophesize(Campaign::class);
         $campaign1->getTitle()->willReturn('Campaign Title 1');
         $campaign1->getId()->willReturn(10);
+        /** @var Campaign|ObjectProphecy $campaign2 */
         $campaign2 = $this->prophesize(Campaign::class);
         $campaign2->getTitle()->willReturn('Campaign Title 2');
         $campaign2->getId()->willReturn(20);
 
+        /** @var Campaigns|ObjectProphecy $campaigns */
         $campaigns = $this->prophesize(Campaigns::class);
         $campaigns->getForUser()->willReturn([
             $campaign1->reveal(),
             $campaign2->reveal(),
         ]);
 
+        /** @var CampaignsFactory|ObjectProphecy $campaignsFactory */
         $campaignsFactory = $this->prophesize(CampaignsFactory::class);
         $campaignsFactory->createFromPageUid(10)->willReturn($campaigns->reveal());
 
-        $subject = new TcaEnhancer(
-            $campaignsFactory->reveal()
-        );
+        /** @var TcaEnhancer|MockObject $subject */
+        $subject = $this->getMockBuilder(TcaEnhancer::class)
+            ->onlyMethods(['resolvePid'])
+            ->setConstructorArgs([$campaignsFactory->reveal()])
+            ->getMock();
+        $subject->expects(self::any())->method('resolvePid')->willReturn(10);
         $subject->getCampaignsForTCA($parameters);
 
         self::assertArrayHasKey('items', $parameters);
