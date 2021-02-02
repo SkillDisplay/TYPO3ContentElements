@@ -26,7 +26,7 @@ class TcaEnhancer
             ['', 0],
         ];
 
-        $pid = BackendUtility::getTSconfig_pidValue('tt_content', $params['row']['uid'], $params['row']['pid']);
+        $pid = $this->resolvePid($params['row']);
         if ($pid > 0) {
             $campaigns = $this->campaignsFactory->createFromPageUid($pid)->getForUser();
             /** @var Campaign $campaign */
@@ -37,5 +37,10 @@ class TcaEnhancer
                 ];
             }
         }
+    }
+
+    protected function resolvePid(array $row): ?int
+    {
+        return BackendUtility::getTSconfig_pidValue('tt_content', $row['uid'], $row['pid']);
     }
 }
