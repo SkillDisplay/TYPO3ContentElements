@@ -23,6 +23,8 @@ namespace SkillDisplay\SkilldisplayContent\ViewHelpers;
  * 02110-1301, USA.
  */
 
+use Closure;
+use Exception;
 use SkillDisplay\PHPToolKit\Verification\Link;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
@@ -44,10 +46,14 @@ abstract class VerificationViewHelper extends AbstractViewHelper
 
     public static function renderStatic(
         array $arguments,
-        \Closure $renderChildrenClosure,
+        Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext
     ) {
-        static::validateIds($arguments);
+        try {
+            static::validateIds($arguments);
+        } catch (Exception $e) {
+            return '';
+        }
 
         return static::verificationHtml($arguments);
     }
@@ -55,22 +61,24 @@ abstract class VerificationViewHelper extends AbstractViewHelper
     abstract protected static function verificationHtml(array $arguments): string;
 
     /**
+     * @param array $arguments
      * @return void
+     * @throws Exception
      */
-    protected static function validateIds(array $arguments)
+    protected static function validateIds(array $arguments): void
     {
         if (
             isset($arguments['skill']) && $arguments['skill'] !== ''
             && isset($arguments['skillSet']) && $arguments['skillSet'] !== ''
         ) {
-            throw new \Exception('Can only handle skill or skillSet not both.', 1600775604);
+            throw new Exception('Can only handle skill or skillSet not both.', 1600775604);
         }
 
         if (
             (isset($arguments['skill']) === false || $arguments['skill'] === '')
             && (isset($arguments['skillSet']) === false || $arguments['skillSet'] === '')
         ) {
-            throw new \Exception('Either needs skill or skillSet, none given.', 1600775604);
+            throw new Exception('Either needs skill or skillSet, none given.', 1600775604);
         }
     }
 

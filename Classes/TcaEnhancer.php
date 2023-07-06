@@ -9,10 +9,7 @@ use TYPO3\CMS\Backend\Utility\BackendUtility;
 
 class TcaEnhancer
 {
-    /**
-     * @var CampaignsFactory
-     */
-    private $campaignsFactory;
+    private CampaignsFactory $campaignsFactory;
 
     public function __construct(
         CampaignsFactory $campaignsFactory

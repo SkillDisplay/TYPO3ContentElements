@@ -22,6 +22,7 @@
         );
     }
 
+    // todo v11?
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['cms/layout/class.tx_cms_layout.php']['tt_content_drawItem'][$extKey] =
         \SkillDisplay\SkilldisplayContent\Backend\Preview::class;
 })('skilldisplay_content');

@@ -1,9 +1,9 @@
 <?php
 
-(function (string $extensionKey, string $tableName) {
-    $languagePath = 'LLL:EXT:' . $extensionKey . '/Resources/Private/Language/locallang_tca.xlf:' . $tableName . '.';
+(function (string $extensionKey) {
+    $languagePath = 'LLL:EXT:' . $extensionKey . '/Resources/Private/Language/locallang_tca.xlf:tt_content.';
 
-    \TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule($GLOBALS['TCA'][$tableName], [
+    \TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule($GLOBALS['TCA']['tt_content'], [
         'columns' => [
             'CType' => [
                 'config' => [
@@ -13,7 +13,7 @@
                 ],
             ],
             'skilldisplay_skills' => [
-                'exclude' => 1,
+                'exclude' => true,
                 'label' => $languagePath . 'skilldisplay_skills',
                 'description' => $languagePath . 'skilldisplay_skills.description',
                 'config' => [
@@ -23,7 +23,7 @@
                 ],
             ],
             'skilldisplay_skillset' => [
-                'exclude' => 1,
+                'exclude' => true,
                 'label' => $languagePath . 'skilldisplay_skillset',
                 'description' => $languagePath . 'skilldisplay_skillset.description',
                 'config' => [
@@ -33,17 +33,16 @@
                 ],
             ],
             'skilldisplay_campaign' => [
-                'exclude' => 1,
+                'exclude' => true,
                 'label' => $languagePath . 'skilldisplay_campaign',
                 'description' => $languagePath . 'skilldisplay_campaign.description',
                 'config' => [
                     'type' => 'select',
                     'renderType' => 'selectSingle',
-                    'itemsProcFunc' => \SkillDisplay\SkilldisplayContent\TcaEnhancer::class
-                        . '->' . 'getCampaignsForTCA',
+                    'itemsProcFunc' => \SkillDisplay\SkilldisplayContent\TcaEnhancer::class . '->' . 'getCampaignsForTCA',
                     'items' => []
                 ]
             ],
         ],
     ]);
-})('skilldisplay_content', 'tt_content');
+})('skilldisplay_content');

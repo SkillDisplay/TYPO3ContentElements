@@ -28,15 +28,8 @@ use SkillDisplay\PHPToolKit\Api\Campaigns;
 
 class CampaignsFactory
 {
-    /**
-     * @var SettingsFactory
-     */
-    private $settingsFactory;
-
-    /**
-     * @var Client
-     */
-    private $client;
+    private SettingsFactory $settingsFactory;
+    private Client $client;
 
     public function __construct(
         SettingsFactory $settingsFactory,

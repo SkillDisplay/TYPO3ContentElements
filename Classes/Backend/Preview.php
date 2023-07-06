@@ -23,6 +23,7 @@ namespace SkillDisplay\SkilldisplayContent\Backend;
  * 02110-1301, USA.
  */
 
+use Exception;
 use SkillDisplay\PHPToolKit\Api\Skill;
 use SkillDisplay\PHPToolKit\Api\SkillSet;
 use TYPO3\CMS\Backend\View\PageLayoutView;
@@ -31,15 +32,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class Preview implements PageLayoutViewDrawItemHookInterface
 {
-    /**
-     * @var Skill
-     */
-    protected $skillApi;
-
-    /**
-     * @var SkillSet
-     */
-    private $skillSetApi;
+    protected Skill $skillApi;
+    private SkillSet $skillSetApi;
 
     public function __construct(
         Skill $skillApi,
@@ -78,7 +72,7 @@ class Preview implements PageLayoutViewDrawItemHookInterface
         foreach ($skills as $skillId) {
             try {
                 $row['skills'][] = $this->skillApi->getById($skillId);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $row['skills'][]['error'] = $e->getMessage();
             }
         }
@@ -93,7 +87,7 @@ class Preview implements PageLayoutViewDrawItemHookInterface
         foreach ($skillSets as $skillSetId) {
             try {
                 $row['skillSets'][] = $this->skillSetApi->getById($skillSetId);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $row['skillSets'][]['error'] = $e->getMessage();
             }
         }

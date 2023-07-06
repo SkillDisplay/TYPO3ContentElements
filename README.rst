@@ -21,8 +21,7 @@ Right now it provides the following features:
 Installation
 ============
 
-The extension can be installed by downloading recent version from GitHub and adding
-it inside `typo3conf/` folder.
+Install the extension via Extension Manager or composer.
 
 Add static TypoScript once installed and activated via Extension Manager.
 The TypoScript contains the rendering definition for provided content elements.
@@ -46,6 +45,11 @@ Or copy the files from `/Resources/Private/Templates/ContentElements/` to your e
 
 Configuration
 =============
+
+You may include default CSS for the templates in your TypoScript::
+
+  page.includeCSS.skilldisplay = EXT:skilldisplay_content/Resources/Public/Css/Styles.css
+
 
 Site configuration is extended, where options like API Key can be provided.
 

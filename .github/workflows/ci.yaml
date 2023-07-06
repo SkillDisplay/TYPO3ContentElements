@@ -16,7 +16,7 @@ jobs:
         php-version:
           - 7.2
           - 7.3
-          - 7.4
+          - 8.2
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -37,7 +37,7 @@ jobs:
       - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 7.4
+          php-version: 8.2
 
       - name: Get Composer Cache Directory
         id: composer-cache
@@ -55,7 +55,7 @@ jobs:
         run: composer install --prefer-dist --no-progress --no-suggest
 
       - name: Check CGL
-        run: ./vendor/bin/phpcs
+        run: .Build/vendor/bin/phpcs
 
   check-dependencies:
     runs-on: ubuntu-latest
@@ -66,7 +66,7 @@ jobs:
       - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 7.4
+          php-version: 8.2
 
       - name: Get Composer Cache Directory
         id: composer-cache
@@ -80,14 +80,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-composer-
 
-      - name: Keep composer v1 until all dev dependencies are v2 ready
-        run: sudo composer selfupdate --1
-
       - name: Install dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest --no-plugins
+        run: composer require maglnet/composer-require-checker
 
       - name: Missing composer requirements
-        run: ./vendor/bin/composer-require-checker check
+        run: .Build/vendor/bin/composer-require-checker check
 
   xml-linting:
     runs-on: ubuntu-latest
@@ -98,7 +95,7 @@ jobs:
       - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 7.4
+          php-version: 8.2
 
       - name: Install xmllint
         run: sudo apt-get install libxml2-utils
@@ -135,8 +132,8 @@ jobs:
     strategy:
       matrix:
         php-version:
-          - 7.3
           - 7.4
+          - 8.2
     steps:
       - uses: actions/checkout@v2
 
@@ -157,14 +154,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-composer-
 
-      - name: Keep composer v1 until all dev dependencies are v2 ready
-        run: sudo composer selfupdate --1
-
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress --no-suggest
 
       - name: PHPUnit Tests
-        run: ./vendor/bin/phpunit --testdox
+        run: .Build/vendor/bin/phpunit --testdox
 
   code-quality:
     runs-on: ubuntu-latest
@@ -175,7 +169,7 @@ jobs:
       - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 7.4
+          php-version: 8.2
 
       - name: Get Composer Cache Directory
         id: composer-cache
@@ -193,4 +187,4 @@ jobs:
         run: composer install --prefer-dist --no-progress --no-suggest
 
       - name: Code Quality (by PHPStan)
-        run: ./vendor/bin/phpstan analyse
+        run: .Build/vendor/bin/phpstan analyse

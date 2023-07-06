@@ -23,6 +23,7 @@ namespace SkillDisplay\SkilldisplayContent\Frontend\DataProcessing;
  * 02110-1301, USA.
  */
 
+use Exception;
 use SkillDisplay\PHPToolKit\Api\Skill;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -30,10 +31,7 @@ use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
 
 class Skills implements DataProcessorInterface
 {
-    /**
-     * @var Skill
-     */
-    protected $skillApi;
+    protected Skill $skillApi;
 
     public function __construct(
         Skill $skillApi
@@ -50,7 +48,7 @@ class Skills implements DataProcessorInterface
         $as = $cObj->stdWrapValue('as', $processorConfiguration, 'skills');
         $skillIds = GeneralUtility::intExplode(
             ',',
-            $cObj->stdWrapValue('skills', $processorConfiguration, ''),
+            $cObj->stdWrapValue('skills', $processorConfiguration),
             true
         );
         $skills = [];
@@ -58,7 +56,7 @@ class Skills implements DataProcessorInterface
         foreach ($skillIds as $skillId) {
             try {
                 $skills[] = $this->skillApi->getById($skillId);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 continue;
             }
         }

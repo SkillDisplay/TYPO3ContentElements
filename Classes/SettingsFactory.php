@@ -23,6 +23,7 @@ namespace SkillDisplay\SkilldisplayContent;
  * 02110-1301, USA.
  */
 
+use RuntimeException;
 use SkillDisplay\PHPToolKit\Configuration\Settings;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Site\Entity\Site;
@@ -30,10 +31,7 @@ use TYPO3\CMS\Core\Site\SiteFinder;
 
 class SettingsFactory
 {
-    /**
-     * @var SiteFinder
-     */
-    private $siteFinder;
+    private SiteFinder $siteFinder;
 
     public function __construct(
         SiteFinder $siteFinder
@@ -45,7 +43,7 @@ class SettingsFactory
     {
         $site = $this->getRequest()->getAttribute('site');
         if ($site === null) {
-            throw new \Exception('Could not determine current site.', 1599721652);
+            throw new RuntimeException('Could not determine current site.', 1599721652);
         }
 
         return $this->createFromSite($site);

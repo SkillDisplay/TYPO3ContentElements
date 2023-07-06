@@ -26,40 +26,36 @@
         }
     },
     "require": {
-        "php": "7.2.* || 7.3.* || 7.4.*",
-        "typo3/cms-core": "^10.4",
-        "skilldisplay/phptoolkit": "^1.2.3",
-        "typo3/cms-backend": "^10.4",
-        "typo3/cms-frontend": "^10.4",
-        "typo3fluid/fluid": "^2.6",
-        "guzzlehttp/guzzle": "^6.5"
+        "php": "^7.4 || ^8.1 || ^8.2",
+        "skilldisplay/phptoolkit": "^2.0",
+        "typo3/cms-backend": "^11.5 || ^12.4",
+        "typo3/cms-frontend": "^11.5 || ^12.4"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.5",
         "phpstan/phpstan": "^0.12.18",
         "phpstan/phpstan-phpunit": "*",
         "phpstan/extension-installer": "^1.0",
-        "maglnet/composer-require-checker": "^2.1",
         "saschaegerer/phpstan-typo3": "^0.13.1",
-        "typo3/testing-framework": "^6.4",
+        "typo3/testing-framework": "^7",
         "phpspec/prophecy-phpunit": "^2",
         "jangregor/phpstan-prophecy": "^0.8.0"
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "scripts": {
-        "post-autoload-dump": [
-            "TYPO3\\TestingFramework\\Composer\\ExtensionTestEnvironment::prepare"
-        ]
-    },
     "extra": {
         "typo3/cms": {
-            "cms-package-dir": "{$vendor-dir}/typo3/cms",
             "extension-key": "skilldisplay_content",
             "web-dir": ".Build/web"
         },
         "branch-alias": {
-            "dev-main": "2.0.x-dev"
+            "dev-main": "3.x-dev"
+        }
+    },
+    "config": {
+        "vendor-dir": ".Build/vendor",
+        "allow-plugins": {
+            "typo3/cms-composer-installers": true,
+            "typo3/class-alias-loader": true,
+            "phpstan/extension-installer": true
         }
     }
 }

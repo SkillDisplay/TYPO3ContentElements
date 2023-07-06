@@ -1,4 +1,4 @@
-tt_content.skilldisplay_skills = < lib.contentElement
+tt_content.skilldisplay_skills =< lib.contentElement
 tt_content.skilldisplay_skills {
     templateName = SkillDisplaySkills
 
@@ -10,7 +10,7 @@ tt_content.skilldisplay_skills {
     }
 }
 
-tt_content.skilldisplay_skillset = < lib.contentElement
+tt_content.skilldisplay_skillset =< lib.contentElement
 tt_content.skilldisplay_skillset {
     templateName = SkillDisplaySkillSet
 
@@ -22,8 +22,3 @@ tt_content.skilldisplay_skillset {
     }
 }
 
-page {
-    includeCSS {
-        skilldisplay = EXT:skilldisplay_content/Resources/Public/Css/Styles.css
-    }
-}
