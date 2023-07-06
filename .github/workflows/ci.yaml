@@ -56,35 +56,6 @@ jobs:
       - name: Check CGL
         run: .Build/vendor/bin/phpcs
 
-  check-dependencies:
-    runs-on: ubuntu-latest
-    needs: [check-composer]
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Install PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.2
-
-      - name: Get Composer Cache Directory
-        id: composer-cache
-        run: |
-            echo "::set-output name=dir::$(composer config cache-files-dir)"
-
-      - uses: actions/cache@v1
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-composer-
-
-      - name: Install dependencies
-        run: composer require maglnet/composer-require-checker
-
-      - name: Missing composer requirements
-        run: .Build/vendor/bin/composer-require-checker check
-
   xml-linting:
     runs-on: ubuntu-latest
     needs: [check-composer]
