@@ -48,7 +48,7 @@ class Skills implements DataProcessorInterface
         $as = $cObj->stdWrapValue('as', $processorConfiguration, 'skills');
         $skillIds = GeneralUtility::intExplode(
             ',',
-            $cObj->stdWrapValue('skills', $processorConfiguration),
+            (string)$cObj->stdWrapValue('skills', $processorConfiguration),
             true
         );
         $skills = [];

@@ -28,7 +28,7 @@
                 'description' => $languagePath . 'skilldisplay_skillset.description',
                 'config' => [
                     'type' => 'input',
-                    'eval' => 'int,required',
+                    'eval' => 'required',
                     'size' => 10,
                 ],
             ],
