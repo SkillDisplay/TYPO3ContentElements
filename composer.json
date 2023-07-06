@@ -27,7 +27,7 @@
     },
     "require": {
         "php": "^7.4 || ^8.1 || ^8.2",
-        "skilldisplay/phptoolkit": "^2.0",
+        "skilldisplay/phptoolkit": "^2.0.1",
         "typo3/cms-backend": "^11.5 || ^12.4",
         "typo3/cms-frontend": "^11.5 || ^12.4"
     },

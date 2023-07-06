@@ -25,7 +25,15 @@ class TcaEnhancer
 
         $pid = $this->resolvePid($params['row']);
         if ($pid > 0) {
-            $campaigns = $this->campaignsFactory->createFromPageUid($pid)->getForUser();
+            try {
+                $campaigns = $this->campaignsFactory->createFromPageUid($pid)->getForUser();
+            } catch (\InvalidArgumentException $e) {
+                // ignore missing API key exception
+                if ($e->getCode() !== 1688660942) {
+                    throw $e;
+                }
+                return;
+            }
             /** @var Campaign $campaign */
             foreach ($campaigns as $campaign) {
                 $params['items'][] = [
