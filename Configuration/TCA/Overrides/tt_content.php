@@ -39,7 +39,8 @@
                 'config' => [
                     'type' => 'select',
                     'renderType' => 'selectSingle',
-                    'itemsProcFunc' => \SkillDisplay\SkilldisplayContent\TcaEnhancer::class . '->' . 'getCampaignsForTCA',
+                    'itemsProcFunc' => \SkillDisplay\SkilldisplayContent\TcaEnhancer::class
+                        . '->' . 'getCampaignsForTCA',
                     'items' => []
                 ]
             ],
