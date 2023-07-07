@@ -18,6 +18,8 @@ Right now it provides the following features:
 
 * ViewHelper to generate verification URL.
 
+* ViewHelper to group skills by domain tag
+
 Installation
 ============
 
@@ -59,5 +61,4 @@ Both can be adjusted via custom TypoScript and TSconfig.
 Usage
 =====
 
-Add content elements to the pages and insert the ID of skills as comma separated
-list, or the ID of a single skill set.
+Add content elements to the pages and insert the ID of skills as comma separated list, or select one of the available skillsets. (The list includes all public SkillSets on the official SkillDisplay platform. Using custom SkillDisplay instances based on the Open Source extension is possible, check the skilldisplay/php-api package for more information)
