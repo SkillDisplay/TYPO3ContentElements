@@ -25,6 +25,8 @@ namespace SkillDisplay\SkilldisplayContent\Frontend\DataProcessing;
 
 use Exception;
 use SkillDisplay\PHPToolKit\Api\SkillSet;
+use TYPO3\CMS\Core\Cache\CacheManager;
+use TYPO3\CMS\Core\Cache\Frontend\VariableFrontend;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
@@ -45,14 +47,36 @@ class SkillSets implements DataProcessorInterface
         array $processorConfiguration,
         array $processedData
     ) {
+
         $as = $cObj->stdWrapValue('as', $processorConfiguration, 'skillSets');
+        $skillSetsIdsRaw = (string)$cObj->stdWrapValue('skillSets', $processorConfiguration);
         $skillSetIds = GeneralUtility::intExplode(
             ',',
-            (string)$cObj->stdWrapValue('skillSets', $processorConfiguration),
+            $skillSetsIdsRaw,
             true
         );
-        $skillSets = [];
 
+        $enableCache = $processorConfiguration['cache'] ?? false;
+        if ($enableCache) {
+            $cacheKey = md5($skillSetsIdsRaw) . $as;
+            /** @var VariableFrontend $cache */
+            $cache = GeneralUtility::makeInstance(CacheManager::class)->getCache('sdcontent');
+            if ($cache->has($cacheKey)) {
+                $data = $cache->get($cacheKey);
+            } else {
+                $data = $this->generateData($skillSetIds);
+                $cache->set($cacheKey, $data);
+            }
+        } else {
+            $data = $this->generateData($skillSetIds);
+        }
+        $processedData[$as] = $data;
+        return $processedData;
+    }
+
+    protected function generateData(array $skillSetIds): array
+    {
+        $skillSets = [];
         foreach ($skillSetIds as $skillSetId) {
             try {
                 $skillSets[] = $this->skillSetApi->getById($skillSetId, true);
@@ -60,8 +84,6 @@ class SkillSets implements DataProcessorInterface
                 continue;
             }
         }
-
-        $processedData[$as] = $skillSets;
-        return $processedData;
+        return $skillSets;
     }
 }

@@ -25,4 +25,20 @@
     // todo v11?
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['cms/layout/class.tx_cms_layout.php']['tt_content_drawItem'][$extKey] =
         \SkillDisplay\SkilldisplayContent\Backend\Preview::class;
+
+
+    $caches = [
+        'sdcontent',
+    ];
+    foreach ($caches as $cacheName) {
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][$cacheName] = [
+            'frontend' => \TYPO3\CMS\Core\Cache\Frontend\VariableFrontend::class,
+            'backend' => \TYPO3\CMS\Core\Cache\Backend\SimpleFileBackend::class,
+            'options' => [
+                'defaultLifetime' => 2592000, // 30 days
+            ],
+            'groups' => ['lowlevel']
+        ];
+    }
+
 })('skilldisplay_content');

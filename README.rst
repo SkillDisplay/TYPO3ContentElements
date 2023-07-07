@@ -48,6 +48,10 @@ Or copy the files from `/Resources/Private/Templates/ContentElements/` to your e
 Configuration
 =============
 
+It is possible to cache the API results for Skill Sets with this TypoScript constant::
+
+  SkilldisplayContent.skillSet.cache = 1
+
 You may include default CSS for the templates in your TypoScript::
 
   page.includeCSS.skilldisplay = EXT:skilldisplay_content/Resources/Public/Css/Styles.css

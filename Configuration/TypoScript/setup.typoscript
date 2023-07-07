@@ -17,6 +17,7 @@ tt_content.skilldisplay_skillset {
     dataProcessing {
         10 = SkillDisplay\SkilldisplayContent\Frontend\DataProcessing\SkillSets
         10 {
+            cache = {$SkilldisplayContent.skillSet.cache}
             skillSets.field = skilldisplay_skillset
         }
     }
