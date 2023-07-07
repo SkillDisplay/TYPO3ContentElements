@@ -36,7 +36,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
  *   <f:for each="{domainGroup.skills}" as="skill">
  *     {skill.name}<br />
  *   </f:for>
- * </sd>
+ * </sd:skillGrouping>
  */
 class SkillGroupingViewHelper extends AbstractViewHelper
 {
@@ -52,10 +52,11 @@ class SkillGroupingViewHelper extends AbstractViewHelper
     }
 
     public static function renderStatic(
-        array $arguments,
-        Closure $renderChildrenClosure,
+        array                     $arguments,
+        Closure                   $renderChildrenClosure,
         RenderingContextInterface $renderingContext
-    ) {
+    )
+    {
         /** @var Skill[] $skills */
         $skills = $arguments['skills'];
         /** @var SkillSet $skillSet */
@@ -84,16 +85,24 @@ class SkillGroupingViewHelper extends AbstractViewHelper
      */
     protected static function group(array $skills): array
     {
-        $result = [
-            /*
-             * [
-             *   'title' => 'Domain 1',
-             *   'skills' => [...skills]
-             * ]
-             */
-        ];
+        $domainTags = [];
+        foreach ($skills as $skill) {
+            $domainTags[] = isset($skill->toArray()['domainTag']) ? $skill->toArray()['domainTag']['title'] : "none";
+        }
+        $domainTags = array_unique($domainTags);
 
-        // todo group skills based on domainTag|title
+        $result = [];
+        foreach ($domainTags as $domainTag) {
+            $result[] = [
+                'title' => $domainTag,
+                'skills' => array_filter($skills, function (Skill $skill) use ($domainTag) {
+                    if (!isset($skill->toArray()['domainTag'])) {
+                        return $domainTag === "none";
+                    }
+                    return $skill->toArray()['domainTag']['title'] === $domainTag;
+                })
+            ];
+        }
         return $result;
     }
 }

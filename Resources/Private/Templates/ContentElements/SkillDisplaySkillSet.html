@@ -1,14 +1,25 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-    xmlns:sd="http://typo3.org/ns/SkillDisplay/SkilldisplayContent/ViewHelpers"
-    data-namespace-typo3-fluid="true">
-    <f:for each="{skillSets}" as="skillSet">
-        {f:render(partial: 'VerificationBox', arguments: {
-            title: skillSet.name,
-            count: '{skillSet.skills -> f:count()}',
-            detailUrl: 'https://my.skilldisplay.eu/skillset/{skillSet.id}',
-            brandLogoUrl: skillSet.brand.logoPublicUrl,
-            verificationUrl: '{sd:verification.url(skillSet: skillSet.id, campaign: data.skilldisplay_campaign)}',
-            description: skillSet.description
-        })}
+      xmlns:sd="http://typo3.org/ns/SkillDisplay/SkilldisplayContent/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+<f:for each="{skillSets}" as="skillSet">
+<sd:skillGrouping skillSet="{skillSet}" as="domainGroup">
+     <b>{domainGroup.title}</b><br/>
+    <f:for each="{domainGroup.skills}" as="skill">
+        {skill.title}<br/>
     </f:for>
+</sd:skillGrouping>
+</f:for>
+
+<hr>
+
+<f:for each="{skillSets}" as="skillSet">
+    {f:render(partial: 'VerificationBox', arguments: {
+    title: skillSet.name,
+    count: '{skillSet.skills -> f:count()}',
+    detailUrl: 'https://my.skilldisplay.eu/skillset/{skillSet.id}',
+    brandLogoUrl: skillSet.brand.logoPublicUrl,
+    verificationUrl: '{sd:verification.url(skillSet: skillSet.id, campaign: data.skilldisplay_campaign)}',
+    description: skillSet.description
+    })}
+</f:for>
 </html>
