@@ -36,7 +36,7 @@ abstract class VerificationViewHelper extends AbstractViewHelper
 
     protected $escapeOutput = false;
 
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         $this->registerArgument('skill', 'integer', 'ID of the Skill.');
         $this->registerArgument('skillSet', 'integer', 'ID of the SkillSet.');

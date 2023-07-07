@@ -44,7 +44,7 @@ class SkillGroupingViewHelper extends AbstractViewHelper
 
     protected $escapeOutput = false;
 
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         $this->registerArgument('skills', 'array', 'An array of skills to group', false, []);
         $this->registerArgument('skillSet', SkillSet::class, 'The skills of this skill set will be grouped');
