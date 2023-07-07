@@ -17,19 +17,23 @@ declare(strict_types=1);
 
 namespace SkillDisplay\SkilldisplayContent\FormDataProvider;
 
+use GuzzleHttp\Client;
 use SkillDisplay\PHPToolKit\Api\SkillSet;
+use SkillDisplay\SkilldisplayContent\SettingsFactory;
 use TYPO3\CMS\Backend\Form\FormDataProviderInterface;
+use TYPO3\CMS\Core\Site\SiteFinder;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Inject available skill sets a valuepicker form
  */
 class ValuePickerItemDataProvider implements FormDataProviderInterface
 {
-    private SkillSet $skillSetApi;
+    protected SiteFinder $siteFinder;
 
-    public function __construct(SkillSet $skillSetApi)
+    public function __construct(SiteFinder $siteFinder = null)
     {
-        $this->skillSetApi = $skillSetApi;
+        $this->siteFinder = $siteFinder ?? GeneralUtility::makeInstance(SiteFinder::class);
     }
 
     /**
@@ -41,7 +45,11 @@ class ValuePickerItemDataProvider implements FormDataProviderInterface
     public function addData(array $result): array
     {
         if ($result['tableName'] === 'tt_content' && isset($result['processedTca']['columns']['skilldisplay_skillset'])) {
-            $skillSets = $this->skillSetApi->getAll();
+            $api = new SkillSet(
+                (new SettingsFactory($this->siteFinder))->createFromPageUid($result['parentPageRow']['uid']),
+                GeneralUtility::makeInstance(Client::class)
+            );
+            $skillSets = $api->getAll();
             foreach ($skillSets as $skillSet) {
                 $result['processedTca']['columns']['skilldisplay_skillset']['config']['valuePicker']['items'][] =
                     [
