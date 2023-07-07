@@ -21,10 +21,12 @@ services:
         alias: '@skilldisplay.settings'
 
     SkillDisplay\PHPToolKit\Api\Skill:
+        public: true
         arguments:
             $settings: '@skilldisplay.settings'
 
     SkillDisplay\PHPToolKit\Api\SkillSet:
+        public: true
         arguments:
             $settings: '@skilldisplay.settings'
 
