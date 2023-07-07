@@ -26,6 +26,14 @@
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['cms/layout/class.tx_cms_layout.php']['tt_content_drawItem'][$extKey] =
         \SkillDisplay\SkilldisplayContent\Backend\Preview::class;
 
+    // Inject skillsets into valuepicker form
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['formDataGroup']['tcaDatabaseRecord']
+    [\SkillDisplay\SkilldisplayContent\FormDataProvider\ValuePickerItemDataProvider::class] = [
+        'depends' => [
+            \TYPO3\CMS\Backend\Form\FormDataProvider\TcaInputPlaceholders::class,
+        ],
+    ];
+
 
     $caches = [
         'sdcontent',

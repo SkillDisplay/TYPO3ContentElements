@@ -30,6 +30,11 @@
                     'type' => 'input',
                     'eval' => 'required',
                     'size' => 10,
+                    'valuePicker' => [
+                        'mode' => 'append',
+                        // filled by ValuePickerItemDataProvider
+                        'items' => [],
+                    ],
                 ],
             ],
             'skilldisplay_campaign' => [
