@@ -1,14 +1,86 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
       xmlns:sd="http://typo3.org/ns/SkillDisplay/SkilldisplayContent/ViewHelpers"
       data-namespace-typo3-fluid="true">
-<f:for each="{skillSets}" as="skillSet">
-<sd:skillGrouping skillSet="{skillSet}" as="domainGroup">
-     <b>{domainGroup.title}</b><br/>
-    <f:for each="{domainGroup.skills}" as="skill">
-        {skill.title}<br/>
+<f:variable name="activeElement" value="{data.pi_flexform.default_element}"/>
+<f:variable name="currentVariants" value="{variants}"/>
+<div class="accordion" id="accordion-{data.uid}">
+    <f:for each="{skillSets}" as="skillSet" iteration="iteration">
+        <sd:skillGrouping skillSet="{skillSet}" as="domainGroup">
+            <div class="accordion-item">
+                <h {data.subitems_header_layout} class="accordion-header"
+                   id="accordion-heading-{data.uid}-{domainGroup.uid}">
+                    <button
+                            class="accordion-button{f:if(condition: '{activeElement} == {domainGroup.uid}', else:' collapsed')}"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#accordion-{data.uid}-{domainGroup.uid}"
+                            data-bs-parent="#accordion-{data.uid}"
+                            aria-expanded="{f:if(condition: '{activeElement} == {domainGroup.uid}', then: 'true', else: 'false')}"
+                            aria-controls="accordion-{data.uid}-{domainGroup.uid}"
+                    >
+                        {domainGroup.title}
+                    </button>
+                </h{data.subitems_header_layout}>
+                <div
+                        id="accordion-{data.uid}-{domainGroup.uid}"
+                        class="accordion-collapse collapse{f:if(condition: '{activeElement} == {domainGroup.uid}', then: ' show')}"
+                        aria-labelledby="accordion-heading-{data.uid}-{domainGroup.uid}"
+                        data-bs-parent="#accordion-{data.uid}"
+                >
+                    <div class="accordion-body">
+                        <div class="accordion-content accordion-content-{domainGroup.uid}">
+                            <f:if condition="{domainGroup.files}">
+                                <div class="accordion-content-item accordion-content-media">
+                                    <f:variable name="imageConfig">
+                                        {settings.responsiveimages.contentelements.accordion.{domainGroup.uid}}
+                                    </f:variable>
+                                    <bk2k:data.imageVariants as="variants" variants="{currentVariants}"
+                                                             multiplier="{imageConfig.multiplier}"
+                                                             gutters="{imageConfig.gutters}"
+                                                             corrections="{imageConfig.corrections}"/>
+                                    <f:render partial="Media/Gallery"
+                                              arguments="{files: record.files, data: record.data, settings: settings, variants: variants}"/>
+                                </div>
+                            </f:if>
+                            <div class="accordion-content-item accordion-content-text">
+                                <ul>
+                                    <f:for each="{domainGroup.skills}" as="skill">
+                                        <li>
+                                            <b>{skill.title}</b> <br>
+                                            <f:if condition="{skill.description}">
+                                                {skill.description->f:format.html()}
+                                            </f:if>
+                                            <!-- ANDERE VARIANTE: {skill.goals->f:format.html()} -->
+                                            <div class="accordion" id="sub-accordion-{skill.id}">
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header" id="sub-heading-{skill.id}">
+                                                        <button class="accordion-button" type="button"
+                                                                data-bs-toggle="collapse"
+                                                                data-bs-target="#sub-collapse-{skill.id}" aria-expanded="true"
+                                                                aria-controls="collapse-{skill.id}">
+                                                            Show goals
+                                                        </button>
+                                                    </h2>
+                                                    <div id="sub-collapse-{skill.id}" class="accordion-collapse collapse show"
+                                                         aria-labelledby="sub-heading-{skill.id}"
+                                                         data-bs-parent="#sub-accordion-{skill.id}">
+                                                        <div class="accordion-body">
+                                                            {skill.goals->f:format.html()}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </f:for>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </sd:skillGrouping>
     </f:for>
-</sd:skillGrouping>
-</f:for>
+</div>
 
 <hr>
 

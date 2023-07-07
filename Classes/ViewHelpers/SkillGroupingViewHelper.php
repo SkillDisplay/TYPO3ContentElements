@@ -84,21 +84,30 @@ class SkillGroupingViewHelper extends AbstractViewHelper
      */
     protected static function group(array $skills): array
     {
-        $domainTags = [];
+        $domainTagsWithId = [];
         foreach ($skills as $skill) {
-            $domainTags[] = isset($skill->toArray()['domainTag']) ? $skill->toArray()['domainTag']['title'] : "none";
+            if (!isset($skill->toArray()['domainTag'])) {
+                $domainTagsWithId[] = [
+                    'uid' => 0,
+                    'title' => 'none'
+                ];
+                continue;
+            }
+            $domainTagsWithId[] = $skill->toArray()['domainTag'];
         }
-        $domainTags = array_unique($domainTags);
+        //remove items with duplicate title
+        $domainTagsWithId = array_map('unserialize', array_unique(array_map('serialize', $domainTagsWithId)));
 
         $result = [];
-        foreach ($domainTags as $domainTag) {
+        foreach ($domainTagsWithId as $domainTag) {
             $result[] = [
-                'title' => $domainTag,
-                'skills' => array_filter($skills, function (Skill $skill) use ($domainTag) {
+                'title' => $domainTag['title'],
+                'uid' => $domainTag['uid'],
+                'skills' => array_filter($skills, function ($skill) use ($domainTag) {
                     if (!isset($skill->toArray()['domainTag'])) {
-                        return $domainTag === "none";
+                        return $domainTag['title'] === 'none';
                     }
-                    return $skill->toArray()['domainTag']['title'] === $domainTag;
+                    return $skill->toArray()['domainTag']['title'] === $domainTag['title'];
                 })
             ];
         }
