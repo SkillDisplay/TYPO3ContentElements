@@ -52,11 +52,10 @@ class SkillGroupingViewHelper extends AbstractViewHelper
     }
 
     public static function renderStatic(
-        array                     $arguments,
-        Closure                   $renderChildrenClosure,
+        array $arguments,
+        Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext
-    )
-    {
+    ) {
         /** @var Skill[] $skills */
         $skills = $arguments['skills'];
         /** @var SkillSet|null $skillSet */
