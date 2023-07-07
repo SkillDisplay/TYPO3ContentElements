@@ -1,10 +1,21 @@
-=========================================
-TYPO3 Extension to integrate SkillDisplay
-=========================================
+=======================================================================
+Display Skills & SkillSets from SkillDisplay as TYPO3 Content Elements
+========================================================================
 
-This TYPO3 extension integrates SkillDisplay into TYPO3 installations.
+This TYPO3 extension allows to show SkillDisplay Skills & SkillSets in TYPO3 installations.
 
-Right now it provides the following features:
+Scenarios
+* Show job requirements based on official certification and expert definitions on your website
+
+* Visualize the curriculum of a training your agency provides
+
+* Display the requirements for official certification (on official pages or your intranet websites)
+
+You can list the skills as content elements one by one, or use SkillSets for grouping purposes (see scenarios above).
+All public SkillSets available on the SkillDisplay platform (e.g.: Certification curriculums, etc.) are automatically available for use in this extension.
+To use custom SkillSets you either need a business account on the official SkillDisplay platform, or host the Open Source SkillDisplay Core Extension on your own TYPO3 instance.
+
+Right now this extension provides the following features:
 
 * Content element to render one or more skills.
 
