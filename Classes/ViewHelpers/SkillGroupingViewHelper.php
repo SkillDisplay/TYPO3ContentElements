@@ -62,11 +62,7 @@ class SkillGroupingViewHelper extends AbstractViewHelper
         $skillSet = $arguments['skillSet'];
         $as = $arguments['as'];
 
-        if ($skillSet) {
-            $groups = self::group($skillSet->getSkills());
-        } else {
-            $groups = self::group($skills);
-        }
+        $groups = self::group($skillSet ? $skillSet->getSkills() : $skills);
 
         $templateVariableContainer = $renderingContext->getVariableProvider();
         $output = '';
@@ -84,32 +80,19 @@ class SkillGroupingViewHelper extends AbstractViewHelper
      */
     protected static function group(array $skills): array
     {
-        $domainTagsWithId = [];
-        foreach ($skills as $skill) {
-            if (!isset($skill->toArray()['domainTag'])) {
-                $domainTagsWithId[] = [
-                    'uid' => 0,
-                    'title' => 'none'
-                ];
-                continue;
-            }
-            $domainTagsWithId[] = $skill->toArray()['domainTag'];
-        }
-        //remove items with duplicate title
-        $domainTagsWithId = array_map('unserialize', array_unique(array_map('serialize', $domainTagsWithId)));
-
         $result = [];
-        foreach ($domainTagsWithId as $domainTag) {
-            $result[] = [
-                'title' => $domainTag['title'],
-                'uid' => $domainTag['uid'],
-                'skills' => array_filter($skills, function ($skill) use ($domainTag) {
-                    if (!isset($skill->toArray()['domainTag'])) {
-                        return $domainTag['title'] === 'none';
-                    }
-                    return $skill->toArray()['domainTag']['title'] === $domainTag['title'];
-                })
-            ];
+        foreach ($skills as $skill) {
+            $skillAsArray = $skill->toArray();
+            $domainTag = !empty($skillAsArray['domainTag']) ? $skillAsArray['domainTag'] : ['uid' => 0, 'title' => ''];
+
+            if (!isset($result[$domainTag['uid']])) {
+                $result[$domainTag['uid']] = [
+                    'uid' => $domainTag['uid'],
+                    'title' => $domainTag['title'],
+                    'skills' => [],
+                ];
+            }
+            $result[$domainTag['uid']]['skills'][] = $skill;
         }
         return $result;
     }
