@@ -54,7 +54,7 @@ class ValuePickerItemDataProvider implements FormDataProviderInterface
                 $result['processedTca']['columns']['skilldisplay_skillset']['config']['valuePicker']['items'][] =
                     [
                         $skillSet->getName(),
-                        $skillSet->getId(),
+                        (string)$skillSet->getId(),
                     ];
             }
         }
